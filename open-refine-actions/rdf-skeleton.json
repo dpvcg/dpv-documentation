@@ -1,0 +1,232 @@
+[
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "schema": {
+      "prefixes": [
+        {
+          "name": "svd",
+          "uri": "http://www.specialprivacy.eu/vocabs/data#"
+        },
+        {
+          "name": "svdu",
+          "uri": "http://www.specialprivacy.eu/vocabs/duration#"
+        },
+        {
+          "name": "sw",
+          "uri": "http://www.w3.org/2003/06/sw-vocab-status/ns#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "svl",
+          "uri": "http://www.specialprivacy.eu/vocabs/locations#"
+        },
+        {
+          "name": "skos",
+          "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "dpv",
+          "uri": "http://www.w3.org/ns/dpv#"
+        },
+        {
+          "name": "spl",
+          "uri": "http://www.specialprivacy.eu/langs/usage-policy#"
+        },
+        {
+          "name": "svr",
+          "uri": "http://www.specialprivacy.eu/vocabs/recipients"
+        },
+        {
+          "name": "svpr",
+          "uri": "http://www.specialprivacy.eu/vocabs/processing#"
+        },
+        {
+          "name": "dct",
+          "uri": "http://purl.org/dc/terms/"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "odrl",
+          "uri": "http://www.w3.org/ns/odrl/2/"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "svpu",
+          "uri": "http://www.specialprivacy.eu/vocabs/purposes#"
+        }
+      ],
+      "baseUri": "http://www.w3.org/ns/dpv#",
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "columnName": "Term",
+          "expression": "value",
+          "isRowNumberCell": false,
+          "links": [
+            {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "curie": "rdf:type",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "Class/Property",
+                "expression": "if(value==\"Class\", \"http://www.w3.org/2000/01/rdf-schema#Class\", \"http://www.w3.org/1999/02/22-rdf-syntax-ns#Property\")",
+                "isRowNumberCell": false,
+                "links": [],
+                "rdfTypes": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "rdfs:label",
+                "expression": "value",
+                "lang": "en",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/description",
+              "curie": "dct:description",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "dc:description",
+                "expression": "value",
+                "lang": "en",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#domain",
+              "curie": "rdfs:domain",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "rdfs:domain",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "links": [],
+                "rdfTypes": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#range",
+              "curie": "rdfs:range",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "rdfs:range",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "links": [],
+                "rdfTypes": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+              "curie": "rdfs:subClassOf",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "rdfs:subClassOf",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "links": [],
+                "rdfTypes": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+              "curie": "rdfs:seeAlso",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "columnName": "related terms",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "links": [],
+                "rdfTypes": []
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "curie": "rdfs:comment",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "rdfs:comment",
+                "expression": "value",
+                "lang": "en",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+              "curie": "rdfs:isDefinedBy",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "rdfs:isDefinedBy",
+                "expression": "forEach(value.split(','), creator, creator.strip())",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/created",
+              "curie": "dct:created",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "dc:created",
+                "expression": "value",
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status",
+              "curie": "sw:term_status",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "sw:term_status",
+                "expression": "value",
+                "lang": "en",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/creator",
+              "curie": "dct:creator",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "dc:creator",
+                "expression": "forEach(value.split(','), creator, creator.strip())",
+                "isRowNumberCell": false
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/terms/date-accepted",
+              "curie": "dct:date-accepted",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "columnName": "dct:date-accepted",
+                "expression": "value",
+                "valueType": "http://www.w3.org/2001/XMLSchema#date",
+                "isRowNumberCell": false
+              }
+            }
+          ],
+          "rdfTypes": []
+        }
+      ]
+    },
+    "description": "Save RDF schema skeleton"
+  }
+]
