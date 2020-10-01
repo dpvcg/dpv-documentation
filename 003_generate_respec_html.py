@@ -10,14 +10,12 @@ EXPORT_HTML_PATH = './docs'
 
 from rdflib import Graph, Namespace
 from rdflib import URIRef
-from rdflib import RDF, RDFS
-from rdflib.namespace import NamespaceManager
-from rdflib.namespace import XSD
-from rdflib.term import Literal, URIRef
-from rdflib.plugins.sparql import prepareQuery
-
 from rdform import DataGraph, RDFS_Resource
-
+import logging
+# logging configuration for debugging to console
+logging.basicConfig(
+    level=logging.DEBUG, format='%(levelname)s - %(funcName)s :: %(lineno)d - %(message)s')
+DEBUG = logging.debug
 
 # UGLY UGLY globals
 G = None
@@ -82,8 +80,17 @@ template_env = Environment(
     loader=template_loader, 
     autoescape=True, trim_blocks=True, lstrip_blocks=True)
 template_env.filters.update(JINJA2_FILTERS)
-template = template_env.get_template('template_base.jinja2')
+template = template_env.get_template('template_dpv.jinja2')
 with open(f'{EXPORT_HTML_PATH}/index.html', 'w+') as fd:
     fd.write(template.render(**TEMPLATE_DATA))
+DEBUG(f'wrote DPV spec at f{EXPORT_HTML_PATH}/index.html')
 
-print('--- END ---')
+# dpv-gdpr
+
+load_data('dpv_gdpr', f'{IMPORT_TTL_PATH}/dpv-gdpr.ttl')
+template = template_env.get_template('template_dpv_gdpr.jinja2')
+with open(f'{EXPORT_HTML_PATH}/dpv-gdpr.html', 'w+') as fd:
+    fd.write(template.render(**TEMPLATE_DATA))
+DEBUG(f'wrote DPV-GDPR spec at f{EXPORT_HTML_PATH}/dpv-gdpr.html')
+
+DEBUG('--- END ---')

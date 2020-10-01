@@ -102,9 +102,14 @@ class RDFS_Resource(object):
             return 'Blank Node'
 
     def __lt__(self, other):
-        if type(other) is RDFS_Resource:
-            return self.iri < other.iri
-        return str(self.iri) < str(other)
+        if type(other) is not RDFS_Resource:
+            return self.iri < other
+        return self.iri < other.iri
+
+    def __gt__(self, other):
+        if type(other) is not RDFS_Resource:
+            return self.iri > other
+        return self.iri > other.iri        
 
 
 class DataGraph(object):

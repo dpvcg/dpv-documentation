@@ -39,7 +39,7 @@
           <tr>
             <td>Defined by:</td>
             <td>
-            {% if term.rdfs_isDefinedBy is sequence and not term.rdfs_isDefinedBy is string %}{% for parent in term.rdfs_isDefinedBy %}
+            {% if term.rdfs_isDefinedBy is sequence and not term.rdfs_isDefinedBy is string %}{% for parent in term.rdfs_isDefinedBy|sort %}
               {{parent}}{{', ' if not loop.last }}
               {% endfor %}{% else %}
               {{term.rdfs_isDefinedBy}}
