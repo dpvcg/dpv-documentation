@@ -1,6 +1,6 @@
-"Term","rdfs:label","dct:description","rdfs:subClassOf","rdfs:seeAlso","rdfs:comment","rdfs:isDefinedBy","dct:created","sw:term_status","dct:creator","dct:date-accepted","resolution"
-"Consent","Consent","Consent as defined by Article 4(11) of the GDPR","","","","https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_11/oj","2019-04-04","accepted","Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+"Term","Description","ParentTerm","RelatedTerms","Relation","Comment","Source","CreationDate","Status","Contributors","AcceptanceDate","Resolution"
+"Consent","Consent as defined by Article 4(11) of the GDPR","","","","","https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_11/oj","2019-04-04","accepted","Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
 ","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"ExplicitConsent","Explicit Consent","Consent that is intended to be considered 'explicit'","Consent","","","","","proposed","Harshvardhan J. Pandit","2020-09-30",""
-"NonExplicitConsent","Non-Explicit Consent","Consent that is intended to be considered as non-explicit","Consent","","","","","proposed","Harshvardhan J. Pandit","2020-09-30",""
-" "," ","","","","","","","","","",""
+"LegalEntity","A Person or Organisation, including Data Subjects, that constitute as a legal entity.","prov:Agent","","","","","2019-04-04","accepted","Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
+" ","","","","","","","","","","",""

@@ -10,22 +10,23 @@ GOOGLE_EXPORT_LINK = (
 
 # The document *must* be publicly viewable (minimum permissions)
 # The document ID is found within the URL
-DPV_DOCUMENT_ID = '1bChnl0JcVNPFLkYAq59531-q2xZuhk9CQIKKWyRoSB4'
+DPV_DOCUMENT_ID = '11bjy424zwC_j4bj9pnhmmI8o7RgrJfX4NgsZ31iR3Wo'
 # The sheet names are assumed to be valid IRIs
 # If they are not, escape them for IRI/HTML representation
 DPV_SHEETS = (
     'BaseOntology',
     'BaseOntology_properties',
-    'TechnicalOrganisationalMeasure',
-    'TechnicalOrganisationalMeasure_properties',
     'PersonalDataCategory',
-    'Processing',
     'Purpose',
     'Purpose_properties',
+    'Processing',
+    'Processing_properties',
+    'TechnicalOrganisationalMeasure',
+    'TechnicalOrganisationalMeasure_properties',
     'Entities',
-    'LegalBasis',
     'Consent',
     'Consent_properties',
+    'LegalBasis',
     )
 
 from urllib import request
