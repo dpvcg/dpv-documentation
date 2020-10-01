@@ -1,12 +1,12 @@
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix dpv: <https://www.w3.org/ns/dpv#> .
+@prefix dpv: <http://www.w3.org/ns/dpv#> .
 @prefix dpv-gdpr: <http://www.w3.org/ns/dpv-gdpr#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sw: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dpv-gdpr:A6-1-a-explicit-consent a rdfs:Class ;
-    rdfs:label "Explicit Consent."@en ;
+    rdfs:label "Art 6(1-a explicit consent)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string,
@@ -20,23 +20,21 @@ dpv-gdpr:A6-1-a-explicit-consent a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-a-non-explicit-consent a rdfs:Class ;
-    rdfs:label """Consent
-"""@en ;
+    rdfs:label "Art 6(1-a non-explicit consent)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string,
         "Harshvardhan J. Pandit"^^xsd:string,
         "Rigo Wenning"^^xsd:string ;
     dct:date-accepted "2019-04-10"^^xsd:date ;
-    dct:description """consent
-"""@en ;
+    dct:description "consent"@en ;
     rdfs:comment "Definition of consent: A data subject's unambigious/clear affirmative action that signifies an agreement to process their personal data (Rigo Wenning) . What is referred to as 'non-explicit consent' here is also termed as 'regular' consent in the Article 29 Working Party document \"Guidelines on Consent under Regulation 2016/679 (wp259rev.01)\". This is the legal basis that requires consent but not at the level of being 'explicit'."@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_6/par_1/pnt_a/oj> ;
     rdfs:subClassOf dpv:LegalBasis ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-b a rdfs:Class ;
-    rdfs:label "Performance of a Contract"@en ;
+    rdfs:label "Art 6(1-b)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -47,7 +45,7 @@ dpv-gdpr:A6-1-b a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-c a rdfs:Class ;
-    rdfs:label "Compliance with a Legal Obligation"@en ;
+    rdfs:label "Art 6(1-c)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -58,7 +56,7 @@ dpv-gdpr:A6-1-c a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-d a rdfs:Class ;
-    rdfs:label "Protection of the Vital Interests of Data Subject"@en ;
+    rdfs:label "Art 6(1-d)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -69,7 +67,7 @@ dpv-gdpr:A6-1-d a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-e a rdfs:Class ;
-    rdfs:label "Public Interest or Official Authority"@en ;
+    rdfs:label "Art 6(1-e)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -80,7 +78,7 @@ dpv-gdpr:A6-1-e a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A6-1-f a rdfs:Class ;
-    rdfs:label "Legitimate Interests of Data Controller"@en ;
+    rdfs:label "Art 6(1-f)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -91,7 +89,7 @@ dpv-gdpr:A6-1-f a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-a a rdfs:Class ;
-    rdfs:label "Explicit consent for Special Categories of Personal Data"@en ;
+    rdfs:label "Art 9(2-a)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -102,7 +100,7 @@ dpv-gdpr:A9-2-a a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-b a rdfs:Class ;
-    rdfs:label "Employment and Social Security and Social Protection Law"@en ;
+    rdfs:label "Art 9(2-b)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -113,7 +111,7 @@ dpv-gdpr:A9-2-b a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-c a rdfs:Class ;
-    rdfs:label "Protection of the Vital Interests of Data Subject"@en ;
+    rdfs:label "Art 9(2-c)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -124,7 +122,7 @@ dpv-gdpr:A9-2-c a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-d a rdfs:Class ;
-    rdfs:label "Legitimate Activities with Appropriate Safeguards"@en ;
+    rdfs:label "Art 9(2-d)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -135,7 +133,7 @@ dpv-gdpr:A9-2-d a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-e a rdfs:Class ;
-    rdfs:label "Data manifestly made Public by the Data Subject"@en ;
+    rdfs:label "Art 9(2-e)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -146,7 +144,7 @@ dpv-gdpr:A9-2-e a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-f a rdfs:Class ;
-    rdfs:label "Legal Claims or Courts in Official Capacity"@en ;
+    rdfs:label "Art 9(2-f)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -157,7 +155,7 @@ dpv-gdpr:A9-2-f a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-g a rdfs:Class ;
-    rdfs:label "Substantial Public Interest"@en ;
+    rdfs:label "Art 9(2-g)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -168,7 +166,7 @@ dpv-gdpr:A9-2-g a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-h a rdfs:Class ;
-    rdfs:label "Medical Diagnosis, Prognisis, Prevention, Provision"@en ;
+    rdfs:label "Art 9(2-h)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -179,7 +177,7 @@ dpv-gdpr:A9-2-h a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-i a rdfs:Class ;
-    rdfs:label "Public Interest in area of Public Health"@en ;
+    rdfs:label "Art 9(2-i)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;
@@ -190,7 +188,7 @@ dpv-gdpr:A9-2-i a rdfs:Class ;
     sw:term_status "accepted"@en .
 
 dpv-gdpr:A9-2-j a rdfs:Class ;
-    rdfs:label "Archiving for Public Interest, Scientific/Historical/Statistical purposes"@en ;
+    rdfs:label "Art 9(2-j)"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:creator "Bud Bruegger"^^xsd:string,
         "Eva Schlehahn"^^xsd:string ;

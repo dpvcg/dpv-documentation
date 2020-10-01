@@ -1,5 +1,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <http://www.w3.org/ns/dpv#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sw: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -108,6 +109,17 @@ dpv:Contract a rdfs:Class ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
     rdfs:subClassOf dpv:LegalAgreement ;
     sw:term_status "accepted"@en .
+
+dpv:DataSource a rdfs:Class ;
+    rdfs:label "Data Source"@en ;
+    dct:created "2020-07-08"^^xsd:date ;
+    dct:creator "Beatriz"^^xsd:string,
+        "Georg"^^xsd:string,
+        "Harsh"^^xsd:string ;
+    dct:description "Source of data"@en ;
+    rdfs:comment "Source is direct point of data collection; 'origin' would indicate the original/others points of where the data originates from"@en ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    sw:term_status "proposed"@en .
 
 dpv:DeIdentification a rdfs:Class ;
     rdfs:label "De-Identification"@en ;
@@ -394,5 +406,61 @@ dpv:TechnicalMeasure a rdfs:Class ;
     dct:description "Technical measures required/followed when processing data of the declared category"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
     rdfs:subClassOf dpv:TechnicalOrganisationalMeasure ;
+    sw:term_status "accepted"@en .
+
+dpv:duration a rdf:Property ;
+    rdfs:label "duration"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:creator "Axel Polleres"^^xsd:string,
+        "Harshvardhan J. Pandit"^^xsd:string,
+        "Mark Lizar"^^xsd:string,
+        "Rob Brennan"^^xsd:string ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Specifies duration for storage of personal data"@en ;
+    rdfs:domain dpv:StorageRestriction ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string,
+        "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:StorageDuration ;
+    sw:term_status "accepted"@en .
+
+dpv:location a rdf:Property ;
+    rdfs:label "location"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:creator "Axel Polleres"^^xsd:string,
+        "Harshvardhan J. Pandit"^^xsd:string,
+        "Mark Lizar"^^xsd:string,
+        "Rob Brennan"^^xsd:string ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Specifies location for storage of personal data"@en ;
+    rdfs:domain dpv:StorageRestriction ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string,
+        "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:StorageLocation ;
+    sw:term_status "accepted"@en .
+
+dpv:measureImplementedBy a rdf:Property ;
+    rdfs:label "measure implemented by"@en ;
+    dct:created "2019-04-23"^^xsd:date ;
+    dct:creator "Axel Polleres"^^xsd:string ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "a generic ObjectProperty to describe how the measure is implemented.  For the values of this property we either allow a blank node with a single rdfs:comment to describe the measure, or a URI to a standard or best practice followed, i.e. a well-known identifier for that standard or a URL where the respective document describes the standard."@en ;
+    rdfs:domain dpv:TechnicalOrganisationalMeasure ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range rdfs:Resource ;
+    sw:term_status "accepted"@en .
+
+dpv:storage a rdf:Property ;
+    rdfs:label "storage"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:creator "Axel Polleres"^^xsd:string,
+        "Harshvardhan J. Pandit"^^xsd:string,
+        "Mark Lizar"^^xsd:string,
+        "Rob Brennan"^^xsd:string ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Specifies restriction on the storage of personal data"@en ;
+    rdfs:domain dpv:TechnicalOrganisationalMeasure ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string,
+        "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:StorageRestriction ;
     sw:term_status "accepted"@en .
 

@@ -18,10 +18,9 @@ from rdflib.plugins.sparql import prepareQuery
 
 from rdform import DataGraph, RDFS_Resource
 
+
 # UGLY UGLY globals
 G = None
-
-
 TEMPLATE_DATA = {}
 
 
@@ -73,14 +72,6 @@ load_data('consent', f'{IMPORT_TTL_PATH}/consent.ttl')
 
 # generate HTML
 from jinja2 import FileSystemLoader, Environment
-JINAJ2_TEMPLATE_VARS = {
-    'RDF_DESC_PROP': ('rdf_type', 'schema_name', 'schema_url'),
-    
-}
-JINJA2_TESTS = {
-    'RDFS_Resource': lambda x: type(x) is RDFS_Resource,
-    'BNode': lambda x: x.startswith('u'),
-}
 JINJA2_FILTERS = {
     'fragment_this': fragment_this,
     'prefix_this': prefix_this,
@@ -90,11 +81,9 @@ template_loader = FileSystemLoader(searchpath='./jinja2_resources')
 template_env = Environment(
     loader=template_loader, 
     autoescape=True, trim_blocks=True, lstrip_blocks=True)
-template_env.tests.update(JINJA2_TESTS)
 template_env.filters.update(JINJA2_FILTERS)
 template = template_env.get_template('template_base.jinja2')
 with open(f'{EXPORT_HTML_PATH}/index.html', 'w+') as fd:
-    fd.write(template.render(
-        **TEMPLATE_DATA, **JINAJ2_TEMPLATE_VARS))
+    fd.write(template.render(**TEMPLATE_DATA))
 
 print('--- END ---')

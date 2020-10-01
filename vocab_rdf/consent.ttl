@@ -1,19 +1,26 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <http://www.w3.org/ns/dpv#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sw: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dpv:Consent a rdfs:Class ;
     rdfs:label "Consent"@en ;
     dct:created "2019-04-04"^^xsd:date ;
-    dct:creator "Bud Bruegger"^^xsd:string,
-        "Harshvardhan J. Pandit"^^xsd:string,
-        "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "Consent as defined by Article 4(11) of the GDPR"@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_11/oj> ;
+    sw:term_status "accepted"@en .
+
+dpv:LegalEntity a rdfs:Class ;
+    rdfs:label "Legal Entity"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "A Person or Organisation, including Data Subjects, that constitute as a legal entity."@en ;
+    rdfs:subClassOf prov:Agent ;
     sw:term_status "accepted"@en .
 
 dpv:consentNotice a rdf:Property ;
@@ -50,7 +57,20 @@ dpv:expiryTime a rdf:Property ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "Specifies the expiry time or duration for consent"@en ;
     rdfs:domain dpv:Consent ;
+    rdfs:range time:TemporalEntity ;
     rdfs:subPropertyOf dpv:expiry ;
+    sw:term_status "accepted"@en .
+
+dpv:isExplicit a rdf:Property ;
+    rdfs:label "is explicit"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:creator "Bud Bruegger"^^xsd:string,
+        "Harshvardhan J. Pandit"^^xsd:string,
+        "Mark Lizar"^^xsd:string ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Indicates consent is explicit as explained in GDPR Article 9.2a and Article 22.2c"@en ;
+    rdfs:domain dpv:Consent ;
+    rdfs:range xsd:boolean ;
     sw:term_status "accepted"@en .
 
 dpv:provisionBy a rdf:Property ;
@@ -63,7 +83,7 @@ dpv:provisionBy a rdf:Property ;
     dct:description "Specifies the entity that provisioned or provided consent"@en ;
     rdfs:comment "Normally this would be the dataSubject, but in some exceptional cases, the consent might be given on behalf by someone else, e.g. parents of minors."@en ;
     rdfs:domain dpv:Consent ;
-    rdfs:range dpv:Entity ;
+    rdfs:range dpv:LegalEntity ;
     sw:term_status "accepted"@en .
 
 dpv:provisionByJustification a rdf:Property ;
@@ -99,6 +119,7 @@ dpv:provisionTime a rdf:Property ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "Specifies the instant in time when consent was given"@en ;
     rdfs:domain dpv:Consent ;
+    rdfs:range time:Instant ;
     sw:term_status "accepted"@en .
 
 dpv:withdrawalBy a rdf:Property ;
@@ -111,7 +132,7 @@ dpv:withdrawalBy a rdf:Property ;
     dct:description "Specifies the entity that withdrew consent"@en ;
     rdfs:comment "Normally this would be the dataSubject, but in some exceptional cases, the consent might be withdraawn on behalf by someone else, e.g. parents of minors."@en ;
     rdfs:domain dpv:Consent ;
-    rdfs:range dpv:Entity ;
+    rdfs:range dpv:LegalEntity ;
     sw:term_status "accepted"@en .
 
 dpv:withdrawalByJustification a rdf:Property ;
@@ -147,6 +168,7 @@ dpv:withdrawalTime a rdf:Property ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "Specifies the instant in time when consent was withdrawn"@en ;
     rdfs:domain dpv:Consent ;
+    rdfs:range time:Instant ;
     sw:term_status "accepted"@en .
 
 dpv:expiry a rdf:Property ;

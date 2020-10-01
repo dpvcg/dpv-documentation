@@ -1,5 +1,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <http://www.w3.org/ns/dpv#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix svpu: <http://www.specialprivacy.eu/vocabs/purposes#> .
 @prefix sw: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
@@ -36,6 +37,23 @@ dpv:AccessControl a rdfs:Class ;
     rdfs:seeAlso svpu:Login ;
     rdfs:subClassOf dpv:Security ;
     sw:term_status "accepted"@en .
+
+dpv:Advertising a rdfs:Class ;
+    rdfs:label "Advertising"@en ;
+    dct:created "2020-07-08"^^xsd:date ;
+    dct:creator "Beatriz"^^xsd:string,
+        "Georg"^^xsd:string,
+        "Harsh"^^xsd:string ;
+    dct:description "Process or Artefact which is used to call attention to a product, service, etc. through announcements, notices, or other forms of communication."@en ;
+    rdfs:comment "Advertising by itself is a subset of Marketing. Advertising by itself does not indicate 'personalisation' i.e. personalised ads."@en ;
+    sw:term_status "proposed"@en .
+
+dpv:Beneficiary a rdfs:Class ;
+    rdfs:label "Beneficiary"@en ;
+    dct:created "2019-05-23"^^xsd:date ;
+    dct:description "self.DataSubject, self.DataController, society ? ( --- under consideration ---)"@en ;
+    rdfs:comment "This needs further details, the group is asking feedback about whether Beneficiaries of a specific purposes hould be specified separately or not"@en ;
+    sw:term_status "proposed"@en .
 
 dpv:CommercialInterest a rdfs:Class ;
     rdfs:label "Commercial Interest"@en ;
@@ -106,6 +124,15 @@ dpv:CustomerCare a rdfs:Class ;
     rdfs:seeAlso svpu:Feedback ;
     rdfs:subClassOf dpv:ServiceProvision ;
     sw:term_status "accepted"@en .
+
+dpv:CustomerRelationshipManagement a rdfs:Class ;
+    rdfs:label "Customer Relationship Management"@en ;
+    dct:created "2020-07-08"^^xsd:date ;
+    dct:creator "Beatriz"^^xsd:string,
+        "Georg"^^xsd:string,
+        "Harsh"^^xsd:string ;
+    dct:description "Process by which a company can manage and analyse its own interactions with its past, current and potential customers"@en ;
+    sw:term_status "proposed"@en .
 
 dpv:DeliveryOfGoods a rdfs:Class ;
     rdfs:label "Delivery of Goods"@en ;
@@ -445,5 +472,23 @@ dpv:UserInterfacePersonalisation a rdfs:Class ;
     dct:description "Personalisation of interfaces presented to the user"@en ;
     rdfs:isDefinedBy <https://www.w3.org/community/dpvcg/wiki/Purposes_for_handling_Personal_Data#High-level_categories_.28to-be-discussed.29> ;
     rdfs:subClassOf dpv:ServicePersonalization ;
+    sw:term_status "accepted"@en .
+
+dpv:hasContext a rdf:Property ;
+    rdfs:label "has context"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Restricts a purpose to the specified context(s)"@en ;
+    rdfs:domain dpv:Purpose ;
+    rdfs:range dpv:Context ;
+    sw:term_status "accepted"@en .
+
+dpv:hasSector a rdf:Property ;
+    rdfs:label "has sector"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-04-05"^^xsd:date ;
+    dct:description "Indicates the purpose is associated with activities in the indicated (Economic) Sector(s)"@en ;
+    rdfs:domain dpv:Context ;
+    rdfs:range dpv:Sector ;
     sw:term_status "accepted"@en .
 

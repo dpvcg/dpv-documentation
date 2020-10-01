@@ -11,6 +11,9 @@
 # 4. It writes those terms to a file - one per each module
 # 5. It combines all written files into dpv.ttl and dpv-gdpr.ttl
 
+# This script assumes the input if well structured and formatted
+# If it isn't, the 'erors' may silently propogate
+
 # CSV FILES are in IMPORT_CSV_PATH
 # RDF FILES are written to EXPORT_TTL_PATH
 ########################################
@@ -35,9 +38,10 @@ INFO = logging.info
 
 DCT = Namespace('http://purl.org/dc/terms/')
 DPV = Namespace('http://www.w3.org/ns/dpv#')
+DPV_GDPR = Namespace('http://www.w3.org/ns/dpv-gdpr#')
 FOAF = Namespace('http://xmlns.com/foaf/0.1/')
 ODRL = Namespace('http://www.w3.org/ns/odrl/2/')
-OWL = Namespace('http://www.w3.org/2002/07/owl#')
+PROV = Namespace('http://www.w3.org/ns/prov#')
 SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
 SPL = Namespace('http://www.specialprivacy.eu/langs/usage-policy#')
 SVD = Namespace('http://www.specialprivacy.eu/vocabs/data#')
@@ -47,13 +51,22 @@ SVPR = Namespace('http://www.specialprivacy.eu/vocabs/processing#')
 SVPU = Namespace('http://www.specialprivacy.eu/vocabs/purposes#')
 SVR = Namespace('http://www.specialprivacy.eu/vocabs/recipients')
 SW = Namespace('http://www.w3.org/2003/06/sw-vocab-status/ns#')
+TIME = Namespace('http://www.w3.org/2006/time#')
+
+# The dpv namespace is the default base for all terms
+# Later, this is changed to write terms under DPV-GDPR namespace
+BASE = DPV
 
 NAMESPACES = {
     'dct': DCT,
     'dpv': DPV,
+    'dpv-gdpr': DPV_GDPR,
     'foaf': FOAF,
     'odrl': ODRL,
     'owl': OWL,
+    'prov': PROV,
+    'rdf': RDF,
+    'rdfs': RDFS,
     'skos': SKOS,
     'spl': SPL,
     'svd': SVD,
@@ -63,18 +76,22 @@ NAMESPACES = {
     'svpu': SVPU,
     'svr': SVR,
     'sw': SW,
+    'time': TIME,
+    'xsd': XSD,
 }
+
+# the field labels are based on what they should be translated to
 
 DPV_Class = namedtuple('DPV_Class', [
     'term', 'rdfs_label', 'dct_description', 'rdfs_subclassof', 
-    'rdfs_seealso', 'rdfs_comment', 'rdfs_isdefinedby', 
+    'rdfs_seealso', 'relation', 'rdfs_comment', 'rdfs_isdefinedby', 
     'dct_created', 'sw_termstatus', 'dct_creator', 
     'dct_dateaccepted', 'resolution'])
 
 DPV_Property = namedtuple('DPV_Property', [
     'term', 'rdfs_label', 'dct_description', 
     'rdfs_domain', 'rdfs_range', 'rdfs_subpropertyof',
-    'rdfs_seealso', 'rdfs_comment', 'rdfs_isdefinedby', 
+    'rdfs_seealso', 'relation', 'rdfs_comment', 'rdfs_isdefinedby', 
     'dct_created', 'sw_termstatus', 'dct_creator', 
     'dct_dateaccepted', 'resolution'])
 
@@ -91,7 +108,12 @@ def extract_terms_from_csv(filepath, Class):
         next(csvreader)
         terms = []
         for row in csvreader:
-            row = row[:attributes]
+            # skip empty rows
+            if not row[0].strip():
+                continue
+            # extract required amount of terms, ignore any field after that
+            row = [term.strip() for term in row[:attributes]]
+            # create instance of required class
             terms.append(Class(*row))
 
     return terms
@@ -104,40 +126,51 @@ def add_common_triples_for_all_terms(term, graph):
     graph: rdflib graph
     returns: None'''
     # rdfs:label
-    graph.add((DPV[f'{term.term}'], RDFS.label, Literal(term.rdfs_label, lang='en')))
+    graph.add((BASE[f'{term.term}'], RDFS.label, Literal(term.rdfs_label, lang='en')))
     # dct:description
-    graph.add((DPV[f'{term.term}'], DCT.description, Literal(term.dct_description, lang='en')))
+    graph.add((BASE[f'{term.term}'], DCT.description, Literal(term.dct_description, lang='en')))
     # rdfs:seeAlso
+    # TODO: use relation field for relevant terms
+    # currently this considers all terms that are related to use rdfs:seeAlso
+    # the next column contains the relation, parse and use that
     if term.rdfs_seealso:
         links = [l.strip() for l in term.rdfs_seealso.split(',')]
         for link in links:
             if link.startswith('http'):
-                graph.add((DPV[f'{term.term}'], RDFS.seeAlso, URIRef(link)))
+                graph.add((BASE[f'{term.term}'], RDFS.seeAlso, URIRef(link)))
+            elif ':' in link:
+                # assuming something like rdfs:Resource
+                prefix, label = link.split(':')
+                # gets the namespace from registered ones and create URI
+                # will throw an error if namespace is not registered
+                # dpv internal terms are expected to have the prefix i.e. dpv:term
+                link = NAMESPACES[prefix][f'{label}']
+                graph.add((BASE[f'{term.term}'], RDFS.seeAlso, link))
             else:
-                graph.add((DPV[f'{term.term}'], RDFS.seeAlso, Literal(link, datatype=XSD.string)))
+                graph.add((BASE[f'{term.term}'], RDFS.seeAlso, Literal(link, datatype=XSD.string)))
     # rdfs:comment
     if term.rdfs_comment:
-        graph.add((DPV[f'{term.term}'], RDFS.comment, Literal(term.rdfs_comment, lang='en')))
+        graph.add((BASE[f'{term.term}'], RDFS.comment, Literal(term.rdfs_comment, lang='en')))
     # rdfs:isDefinedBy
     if term.rdfs_isdefinedby:
         links = [l.strip() for l in term.rdfs_isdefinedby.split(',')]
         for link in links:
             if link.startswith('http'):
-                graph.add((DPV[f'{term.term}'], RDFS.isDefinedBy, URIRef(link)))
+                graph.add((BASE[f'{term.term}'], RDFS.isDefinedBy, URIRef(link)))
             else:
-                graph.add((DPV[f'{term.term}'], RDFS.isDefinedBy, Literal(link, datatype=XSD.string)))
+                graph.add((BASE[f'{term.term}'], RDFS.isDefinedBy, Literal(link, datatype=XSD.string)))
     # dct:created
-    graph.add((DPV[f'{term.term}'], DCT.created, Literal(term.dct_created, datatype=XSD.date)))
+    graph.add((BASE[f'{term.term}'], DCT.created, Literal(term.dct_created, datatype=XSD.date)))
     # sw:term_status
-    graph.add((DPV[f'{term.term}'], SW.term_status, Literal(term.sw_termstatus, lang='en')))
+    graph.add((BASE[f'{term.term}'], SW.term_status, Literal(term.sw_termstatus, lang='en')))
     # dct:creator
     if term.dct_creator:
         authors = [a.strip() for a in term.dct_creator.split(',')]
         for author in authors:
-            graph.add((DPV[f'{term.term}'], DCT.creator, Literal(author, datatype=XSD.string)))
+            graph.add((BASE[f'{term.term}'], DCT.creator, Literal(author, datatype=XSD.string)))
     # dct:date-accepted
     if term.dct_dateaccepted:
-        graph.add((DPV[f'{term.term}'], DCT['date-accepted'], Literal(term.dct_dateaccepted, datatype=XSD.date)))
+        graph.add((BASE[f'{term.term}'], DCT['date-accepted'], Literal(term.dct_dateaccepted, datatype=XSD.date)))
     # resolution
         # do nothing
 
@@ -151,19 +184,27 @@ def add_triples_for_classes(classes, graph):
     returns: None'''
 
     for cls in classes:
-        # only record accepted classes
-        if cls.sw_termstatus != "accepted":
-            continue
+        # only add accepted classes
+        # if cls.sw_termstatus != "accepted":
+        #     continue
         # rdf:type
-        graph.add((DPV[f'{cls.term}'], RDF.type, RDFS.Class))
+        graph.add((BASE[f'{cls.term}'], RDF.type, RDFS.Class))
         # rdfs:subClassOf
         if cls.rdfs_subclassof:
             parents = [p.strip() for p in cls.rdfs_subclassof.split(',')]
             for parent in parents:
                 if parent.startswith('http'):
-                    graph.add((DPV[f'{cls.term}'], RDFS.subClassOf, URIRef(parent)))
+                    graph.add((BASE[f'{cls.term}'], RDFS.subClassOf, URIRef(parent)))
+                elif ':' in parent:
+                    # assuming something like rdfs:Resource
+                    prefix, term = parent.split(':')
+                    # gets the namespace from registered ones and create URI
+                    # will throw an error if namespace is not registered
+                    # dpv internal terms are expected to have the prefix i.e. dpv:term
+                    parent = NAMESPACES[prefix][f'{term}']
+                    graph.add((BASE[f'{cls.term}'], RDFS.subClassOf, parent))
                 else:
-                    graph.add((DPV[f'{cls.term}'], RDFS.subClassOf, DPV[f'{parent}']))
+                    graph.add((BASE[f'{cls.term}'], RDFS.subClassOf, Literal(parent, datatype=XSD.string)))
         
         add_common_triples_for_all_terms(cls, graph)
 
@@ -181,21 +222,41 @@ def add_triples_for_properties(properties, graph):
         if prop.sw_termstatus != "accepted":
             continue
         # rdf:type
-        graph.add((DPV[f'{prop.term}'], RDF.type, RDF.Property))
+        graph.add((BASE[f'{prop.term}'], RDF.type, RDF.Property))
         # rdfs:domain
         if prop.rdfs_domain:
-            graph.add((DPV[f'{prop.term}'], RDFS.domain, DPV[f'{prop.rdfs_domain}']))
+            # assuming something like rdfs:Resource
+            prefix, label = prop.rdfs_domain.split(':')
+            # gets the namespace from registered ones and create URI
+            # will throw an error if namespace is not registered
+            # dpv internal terms are expected to have the prefix i.e. dpv:term
+            link = NAMESPACES[prefix][f'{label}']
+            graph.add((BASE[f'{prop.term}'], RDFS.domain, link))
         # rdfs:range
         if prop.rdfs_range:
-            graph.add((DPV[f'{prop.term}'], RDFS.range, DPV[f'{prop.rdfs_range}']))
+            # assuming something like rdfs:Resource
+            prefix, label = prop.rdfs_range.split(':')
+            # gets the namespace from registered ones and create URI
+            # will throw an error if namespace is not registered
+            # dpv internal terms are expected to have the prefix i.e. dpv:term
+            link = NAMESPACES[prefix][f'{label}']
+            graph.add((BASE[f'{prop.term}'], RDFS.range, link))
         # rdfs:subPropertyOf
         if prop.rdfs_subpropertyof:
             parents = [p.strip() for p in prop.rdfs_subpropertyof.split(',')]
             for parent in parents:
                 if parent.startswith('http'):
-                    graph.add((DPV[f'{prop.term}'], RDFS.subPropertyOf, URIRef(parent)))
+                    graph.add((BASE[f'{prop.term}'], RDFS.subPropertyOf, URIRef(parent)))
+                elif ':' in parent:
+                    # assuming something like rdfs:Resource
+                    prefix, term = parent.split(':')
+                    # gets the namespace from registered ones and create URI
+                    # will throw an error if namespace is not registered
+                    # dpv internal terms are expected to have the prefix i.e. dpv:term
+                    parent = NAMESPACES[prefix][f'{term}']
+                    graph.add((BASE[f'{prop.term}'], RDFS.subPropertyOf, parent))
                 else:
-                    graph.add((DPV[f'{prop.term}'], RDFS.subPropertyOf, DPV[f'{parent}']))
+                    graph.add((BASE[f'{prop.term}'], RDFS.subPropertyOf, Literal(parent, datatype=XSD.string)))
         add_common_triples_for_all_terms(prop, graph)
 
 
@@ -213,9 +274,11 @@ DPV_CSV_FILES = {
         },
     'purposes': {
         'classes': f'{IMPORT_CSV_PATH}/Purpose.csv',
+        'properties': f'{IMPORT_CSV_PATH}/Purpose_properties.csv',
         },
     'processing': {
-        'classes': f'{IMPORT_CSV_PATH}/Processing.csv'
+        'classes': f'{IMPORT_CSV_PATH}/Processing.csv',
+        'properties': f'{IMPORT_CSV_PATH}/Processing_properties.csv',
         },
     'technical_organisational_measures': {
         'classes': f'{IMPORT_CSV_PATH}/TechnicalOrganisationalMeasure.csv',
@@ -261,9 +324,7 @@ DPV_GRAPH.serialize(f'{EXPORT_TTL_PATH}/dpv.ttl', format='turtle')
 # so instead of rewriting the entire code again for dpv-gdpr,
 # here I become lazy and instead change the DPV namespace to DPV-GDPR
 
-NAMESPACES['dpv'] = Namespace('https://www.w3.org/ns/dpv#')
-NAMESPACES['dpv-gdpr'] = Namespace('http://www.w3.org/ns/dpv-gdpr#')
-DPV = NAMESPACES['dpv-gdpr']
+BASE = NAMESPACES['dpv-gdpr']
 
 label = 'dpv-gdpr'
 classes = f'{IMPORT_CSV_PATH}/LegalBasis.csv'

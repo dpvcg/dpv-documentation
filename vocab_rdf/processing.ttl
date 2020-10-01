@@ -1,5 +1,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <http://www.w3.org/ns/dpv#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix svpr: <http://www.specialprivacy.eu/vocabs/processing#> .
 @prefix sw: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
@@ -18,7 +19,7 @@ dpv:Adapt a rdfs:Class ;
     rdfs:label "Adapt"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:date-accepted "2019-05-07"^^xsd:date ;
-    dct:description "to modify the data, often rewritten into a new form for a new use "@en ;
+    dct:description "to modify the data, often rewritten into a new form for a new use"@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_2/oj> ;
     rdfs:subClassOf dpv:Transform ;
     sw:term_status "accepted"@en .
@@ -202,15 +203,14 @@ dpv:Profiling a rdfs:Class ;
     dct:date-accepted "2019-05-07"^^xsd:date ;
     dct:description "to create a profile that describes or represents a person"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
-    rdfs:subClassOf dpv:EvaluationScoring,
-        dpv:Use ;
+    rdfs:subClassOf dpv:Use ;
     sw:term_status "accepted"@en .
 
 dpv:PseudoAnonymise a rdfs:Class ;
     rdfs:label "Pseudo-Anonymise"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:date-accepted "2019-05-07"^^xsd:date ;
-    dct:description "to replace personal identifiable information by artificial identifiers "@en ;
+    dct:description "to replace personal identifiable information by artificial identifiers"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
     rdfs:subClassOf dpv:Transform ;
     sw:term_status "accepted"@en .
@@ -237,7 +237,7 @@ dpv:Restrict a rdfs:Class ;
     rdfs:label "Restrict"@en ;
     dct:created "2019-04-04"^^xsd:date ;
     dct:date-accepted "2019-05-07"^^xsd:date ;
-    dct:description "to apply a restriction on the processsing of specific records "@en ;
+    dct:description "to apply a restriction on the processsing of specific records"@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_2/oj> ;
     rdfs:subClassOf dpv:Transform ;
     sw:term_status "accepted"@en .
@@ -313,5 +313,75 @@ dpv:Use a rdfs:Class ;
     dct:description "to use data"@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_4/par_2/oj> ;
     rdfs:subClassOf dpv:Processing ;
+    sw:term_status "accepted"@en .
+
+dpv:innovativeUseOfNewSolutions a rdf:Property ;
+    rdfs:label "involves innovative use of new solutions"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates the processing comprises of innovative uses of new or radical solutions"@en ;
+    rdfs:comment "e.g. combining fingerprint & face scan for access control. What is concidered new/innovative is of course subject to change over time."@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
+    sw:term_status "accepted"@en .
+
+dpv:isAutomatedDecisionMaking a rdf:Property ;
+    rdfs:label "is automated decision making"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates whether the processing comprises of or is part of or results in automated decision making"@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
+    sw:term_status "accepted"@en .
+
+dpv:isEvaluationScoring a rdf:Property ;
+    rdfs:label "is evaluation or scoring"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates whether the processing ir part of or results in evaluation or scoring of an individual or their personal data"@en ;
+    rdfs:comment "including profiling and predicting,"@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
+    sw:term_status "accepted"@en .
+
+dpv:isLargeScale a rdf:Property ;
+    rdfs:label "is large scale"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates the processing is carried out at large scale in terms of size of data or individuals associated"@en ;
+    rdfs:comment """Involves large amounts of personal data or data subjects.
+The WP29 recommends that the following factors, in particular, be considered when determining whether the processing is carried out on a large scale (WP29 Guidelines on Data Protection Officer 16/EN WP 243):
+a. the number of data subjects concerned, either as a specific number or as a proportion
+of the relevant population;
+b. the volume of data and/or the range of different data items being processed;
+c. the duration, or permanence, of the data processing activity;
+d. the geographical extent of the processing activity."""@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
+    sw:term_status "accepted"@en .
+
+dpv:isMatchingCombining a rdf:Property ;
+    rdfs:label "is matcing or combining"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates whether the processing comprises of matching or combining existing data"@en ;
+    rdfs:comment "originating from two or more data processing operations performed for different purposes and/or by different data controllers in a way that would exceed the reasonable expectations of the data subject (WP29 Opinion on Purpose limitation 13/EN WP 203, p.24).  For instance Integration/Enrichment with other data (not necessarily personal only)"@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
+    sw:term_status "accepted"@en .
+
+dpv:isSystematicMonitoring a rdf:Property ;
+    rdfs:label "is systematic or monitoring"@en ;
+    dct:created "2019-04-04"^^xsd:date ;
+    dct:date-accepted "2019-05-07"^^xsd:date ;
+    dct:description "Indicates whether the processing comprises of systematic monitoring of data subjects or their personal data"@en ;
+    rdfs:domain dpv:Processing ;
+    rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range xsd:boolean ;
     sw:term_status "accepted"@en .
 

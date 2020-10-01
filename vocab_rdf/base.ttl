@@ -1,5 +1,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <http://www.w3.org/ns/dpv#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix spl: <http://www.specialprivacy.eu/langs/usage-policy#> .
@@ -68,6 +69,7 @@ dpv:Processing a rdfs:Class ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string,
         "SPECIAL"^^xsd:string ;
     rdfs:seeAlso spl:AnyProcessing ;
+    rdfs:subClassOf odrl:Action ;
     sw:term_status "accepted"@en .
 
 dpv:Purpose a rdfs:Class ;
@@ -114,8 +116,8 @@ dpv:hasDataController a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a data controller with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range dpv:Datacontroller ;
     sw:term_status "accepted"@en .
 
 dpv:hasDataSubject a rdf:Property ;
@@ -128,8 +130,8 @@ dpv:hasDataSubject a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a data subject with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range dpv:DataSubject ;
     sw:term_status "accepted"@en .
 
 dpv:hasLegalBasis a rdf:Property ;
@@ -140,6 +142,7 @@ dpv:hasLegalBasis a rdf:Property ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates an instance of legal data handling with its underlying legal basis"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range dpv:LegalBasis ;
     sw:term_status "accepted"@en .
 
 dpv:hasPersonalDataCategory a rdf:Property ;
@@ -152,9 +155,9 @@ dpv:hasPersonalDataCategory a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a personal data category with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string,
         "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:PersonalDataCategory ;
     sw:term_status "accepted"@en .
 
 dpv:hasProcessing a rdf:Property ;
@@ -167,9 +170,9 @@ dpv:hasProcessing a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a data processing category with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string,
         "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:Processing ;
     sw:term_status "accepted"@en .
 
 dpv:hasPurpose a rdf:Property ;
@@ -182,9 +185,9 @@ dpv:hasPurpose a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a purpose with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string,
         "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:Purpose ;
     sw:term_status "accepted"@en .
 
 dpv:hasRecipient a rdf:Property ;
@@ -197,9 +200,9 @@ dpv:hasRecipient a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a recipient with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string,
         "SPECIAL"^^xsd:string ;
+    rdfs:range dpv:Recipient ;
     sw:term_status "accepted"@en .
 
 dpv:hasTechnicalOrganisationalMeasure a rdf:Property ;
@@ -212,7 +215,7 @@ dpv:hasTechnicalOrganisationalMeasure a rdf:Property ;
         "Mark Lizar"^^xsd:string ;
     dct:date-accepted "2019-04-05"^^xsd:date ;
     dct:description "This property associates a technical/organisational measure with an instance of legal data handling or consent"@en ;
-    rdfs:comment "We replicate all the properties except Legalbasis of personal data handling for consent, to declare what kinds of personal data handling are consented to"@en ;
     rdfs:isDefinedBy "DPVCG"^^xsd:string ;
+    rdfs:range dpv:TechnicalOrganisationalMeasure ;
     sw:term_status "accepted"@en .
 
