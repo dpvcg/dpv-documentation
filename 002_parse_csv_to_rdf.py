@@ -15,11 +15,21 @@
 # If it isn't, the 'erors' may silently propogate
 
 # CSV FILES are in IMPORT_CSV_PATH
-# RDF FILES are written to EXPORT_TTL_PATH
+# RDF FILES are written to EXPORT_DPV_MODULE_PATH
 ########################################
 
 IMPORT_CSV_PATH = './vocab_csv'
-EXPORT_TTL_PATH = './vocab_rdf'
+EXPORT_DPV_PATH = './vocab_dpv'
+EXPORT_DPV_MODULE_PATH = './vocab_dpv/modules'
+EXPORT_DPV_GDPR_PATH = './vocab_dpv_gdpr'
+
+# serializations in the form of extention: rdflib name
+RDF_SERIALIZATIONS = {
+    'rdf': 'xml', 
+    'ttl': 'turtle', 
+    'n3': 'n3',
+    'jsonld': 'json-ld'
+    }
 
 import csv
 from collections import namedtuple
@@ -260,6 +270,13 @@ def add_triples_for_properties(properties, graph):
         add_common_triples_for_all_terms(prop, graph)
 
 
+def serialize_graph(graph, filepath):
+    '''serializes given graph at filepath with defined formats'''
+    for ext, format in RDF_SERIALIZATIONS.items():
+        graph.serialize(f'{filepath}.{ext}', format=format)
+        INFO(f'wrote {filepath}.{ext}')
+
+
 # #############################################################################
 
 # DPV #
@@ -308,15 +325,18 @@ for name, module in DPV_CSV_FILES.items():
         properties = extract_terms_from_csv(module['properties'], DPV_Property)
         DEBUG(f'there are {len(properties)} properties in {name}')
         add_triples_for_properties(properties, graph)
-    graph.serialize(f'{EXPORT_TTL_PATH}/{name}.ttl', format='turtle')
-    INFO(f'wrote {EXPORT_TTL_PATH}/{name}.ttl')
+    serialize_graph(graph, f'{EXPORT_DPV_MODULE_PATH}/{name}')
     DPV_GRAPH += graph
 
-# TODO: Also add information about the ontology itself
-# this could be a simple file import
+# add information about ontology
+# this is assumed to be in file dpv-ontology-metadata.ttl
+graph = Graph()
+graph.load('dpv-ontology-metadata.ttl', format='turtle')
+DPV_GRAPH += graph
+
 for prefix, namespace in NAMESPACES.items():
         DPV_GRAPH.namespace_manager.bind(prefix, namespace)
-DPV_GRAPH.serialize(f'{EXPORT_TTL_PATH}/dpv.ttl', format='turtle')
+serialize_graph(DPV_GRAPH, f'{EXPORT_DPV_PATH}/dpv')
 
 # DPV-GDPR #
 # dpv-gdpr is the exact same as dpv in terms of requirements and structure
@@ -326,14 +346,11 @@ DPV_GRAPH.serialize(f'{EXPORT_TTL_PATH}/dpv.ttl', format='turtle')
 
 BASE = NAMESPACES['dpv-gdpr']
 
-label = 'dpv-gdpr'
-classes = f'{IMPORT_CSV_PATH}/LegalBasis.csv'
-
 graph = Graph()
 for prefix, namespace in NAMESPACES.items():
     graph.namespace_manager.bind(prefix, namespace)
-classes = extract_terms_from_csv(classes, DPV_Class)
+classes = extract_terms_from_csv(f'{IMPORT_CSV_PATH}/LegalBasis.csv', DPV_Class)
 add_triples_for_classes(classes, graph)
-graph.serialize(f'{EXPORT_TTL_PATH}/{label}.ttl', format='turtle')
+serialize_graph(graph, f'{EXPORT_DPV_GDPR_PATH}/dpv-gdpr')
 
 # #############################################################################

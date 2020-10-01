@@ -5,7 +5,8 @@
 
 # The vocabularies are modular
 
-IMPORT_TTL_PATH = './vocab_rdf'
+IMPORT_DPV_MODULES_PATH = './vocab_dpv/modules'
+IMPORT_DPV_GDPR_PATH = './vocab_dpv_gdpr'
 EXPORT_HTML_PATH = './docs'
 
 from rdflib import Graph, Namespace
@@ -59,13 +60,13 @@ def fragment_this(item):
 
 
 # LOAD DATA
-load_data('core', f'{IMPORT_TTL_PATH}/base.ttl')
-load_data('personaldata', f'{IMPORT_TTL_PATH}/personal_data_categories.ttl')
-load_data('purpose', f'{IMPORT_TTL_PATH}/purposes.ttl')
-load_data('processing', f'{IMPORT_TTL_PATH}/processing.ttl')
-load_data('technical_organisational_measures', f'{IMPORT_TTL_PATH}/technical_organisational_measures.ttl')
-load_data('entities', f'{IMPORT_TTL_PATH}/entities.ttl')
-load_data('consent', f'{IMPORT_TTL_PATH}/consent.ttl')
+load_data('core', f'{IMPORT_DPV_MODULES_PATH}/base.ttl')
+load_data('personaldata', f'{IMPORT_DPV_MODULES_PATH}/personal_data_categories.ttl')
+load_data('purpose', f'{IMPORT_DPV_MODULES_PATH}/purposes.ttl')
+load_data('processing', f'{IMPORT_DPV_MODULES_PATH}/processing.ttl')
+load_data('technical_organisational_measures', f'{IMPORT_DPV_MODULES_PATH}/technical_organisational_measures.ttl')
+load_data('entities', f'{IMPORT_DPV_MODULES_PATH}/entities.ttl')
+load_data('consent', f'{IMPORT_DPV_MODULES_PATH}/consent.ttl')
 
 
 # generate HTML
@@ -87,7 +88,7 @@ DEBUG(f'wrote DPV spec at f{EXPORT_HTML_PATH}/index.html')
 
 # dpv-gdpr
 
-load_data('dpv_gdpr', f'{IMPORT_TTL_PATH}/dpv-gdpr.ttl')
+load_data('dpv_gdpr', f'{IMPORT_DPV_GDPR_PATH}/dpv-gdpr.ttl')
 template = template_env.get_template('template_dpv_gdpr.jinja2')
 with open(f'{EXPORT_HTML_PATH}/dpv-gdpr.html', 'w+') as fd:
     fd.write(template.render(**TEMPLATE_DATA))
