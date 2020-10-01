@@ -5,6 +5,9 @@
 
 # The vocabularies are modular
 
+IMPORT_TTL_PATH = './vocab_rdf'
+EXPORT_HTML_PATH = './vocab_html'
+
 from rdflib import Graph, Namespace
 from rdflib import URIRef
 from rdflib import RDF, RDFS
@@ -15,27 +18,26 @@ from rdflib.plugins.sparql import prepareQuery
 
 from rdform import DataGraph, RDFS_Resource
 
-g = Graph()
-g.load('core.ttl', format='turtle')
+# UGLY UGLY globals
+G = None
 
-G = DataGraph()
-G.load(g)
-G.graph.ns = { k:v for k,v in G.graph.namespaces() }
 
-SPARQL_QUERY_CLASS = '''
-    SELECT ?iri ?title
-    WHERE {
-        ?iri a rdfs:Class .
-        ?iri rdfs:label ?title .
-    }
-    '''
-SPARQL_QUERY_PROPERTIES = '''
-    SELECT ?iri ?title
-    WHERE {
-        ?iri a rdf:Property .
-        ?iri rdfs:label ?title .
-    }
-    '''
+TEMPLATE_DATA = {}
+
+
+def load_data(label, filepath):
+    global G
+    g = Graph()
+    g.load(filepath, format='turtle')
+    G = DataGraph()
+    G.load(g)
+    G.graph.ns = { k:v for k,v in G.graph.namespaces() }
+    classes = G.get_instances_of('rdfs_Class')
+    # for c in classes:
+    #     print(c, c.__dict__['metadata'].keys())
+    TEMPLATE_DATA[f'{label}_classes'] = classes
+    TEMPLATE_DATA[f'{label}_properties'] = G.get_instances_of('rdf_Property')
+
 
 def prefix_this(item):
     # DEBUG(f'item: {item} type: {type(item)}')
@@ -52,22 +54,28 @@ def prefix_this(item):
     # DEBUG(f'prefixed {item} to: {iri}')
     return iri
 
+
 def fragment_this(item):
     if '#' not in item:
         return item
     return item.split('#')[-1]
 
 
-# results = G.graph.query(SPARQL_QUERY)
-# for iri, title, _ in results:
-#     print(prefix_this(iri))
+# LOAD DATA
+load_data('core', f'{IMPORT_TTL_PATH}/base.ttl')
+load_data('personaldata', f'{IMPORT_TTL_PATH}/personal_data_categories.ttl')
+load_data('purpose', f'{IMPORT_TTL_PATH}/purposes.ttl')
+load_data('processing', f'{IMPORT_TTL_PATH}/processing.ttl')
+load_data('technical_organisational_measures', f'{IMPORT_TTL_PATH}/technical_organisational_measures.ttl')
+load_data('entities', f'{IMPORT_TTL_PATH}/entities.ttl')
+load_data('consent', f'{IMPORT_TTL_PATH}/consent.ttl')
 
 
 # generate HTML
 from jinja2 import FileSystemLoader, Environment
 JINAJ2_TEMPLATE_VARS = {
     'RDF_DESC_PROP': ('rdf_type', 'schema_name', 'schema_url'),
-    'prefix_this': prefix_this,
+    
 }
 JINJA2_TESTS = {
     'RDFS_Resource': lambda x: type(x) is RDFS_Resource,
@@ -75,20 +83,18 @@ JINJA2_TESTS = {
 }
 JINJA2_FILTERS = {
     'fragment_this': fragment_this,
+    'prefix_this': prefix_this,
 }
 
-classes = G.get_instances_of('rdfs_Class')
-properties = G.get_instances_of('rdf_Property')
-
-template_loader = FileSystemLoader(searchpath='.')
+template_loader = FileSystemLoader(searchpath='./jinja2_resources')
 template_env = Environment(
     loader=template_loader, 
     autoescape=True, trim_blocks=True, lstrip_blocks=True)
 template_env.tests.update(JINJA2_TESTS)
 template_env.filters.update(JINJA2_FILTERS)
 template = template_env.get_template('template_base.jinja2')
-with open('index.html', 'w+') as fd:
+with open(f'{EXPORT_HTML_PATH}/index.html', 'w+') as fd:
     fd.write(template.render(
-        classes=classes, properties=properties, **JINAJ2_TEMPLATE_VARS))
+        **TEMPLATE_DATA, **JINAJ2_TEMPLATE_VARS))
 
 print('--- END ---')

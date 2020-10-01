@@ -15,13 +15,17 @@ DPV_DOCUMENT_ID = '1bChnl0JcVNPFLkYAq59531-q2xZuhk9CQIKKWyRoSB4'
 # If they are not, escape them for IRI/HTML representation
 DPV_SHEETS = (
     'BaseOntology',
+    'BaseOntology_properties',
     'TechnicalOrganisationalMeasure',
+    'TechnicalOrganisationalMeasure_properties',
     'PersonalDataCategory',
     'Processing',
     'Purpose',
+    'Purpose_properties',
     'Entities',
     'LegalBasis',
     'Consent',
+    'Consent_properties',
     )
 
 from urllib import request
