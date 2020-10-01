@@ -6,7 +6,7 @@
 # The vocabularies are modular
 
 IMPORT_TTL_PATH = './vocab_rdf'
-EXPORT_HTML_PATH = './vocab_html'
+EXPORT_HTML_PATH = './docs'
 
 from rdflib import Graph, Namespace
 from rdflib import URIRef
