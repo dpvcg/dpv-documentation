@@ -93,6 +93,28 @@ dpv:Context a rdfs:Class ;
     dct:description "Used to scope the purpose, e.g. restriction to a certain business sector"@en ;
     sw:term_status "accepted"@en .
 
+dpv:CreateEventRecommendations a rdfs:Class ;
+    rdfs:label "Create Event Recommendations"@en ;
+    dct:created "2019-11-25"^^xsd:date ;
+    dct:creator "Harshvardhan J. Pandit"^^xsd:string,
+        "Rudy Jacob"^^xsd:string ;
+    dct:date-accepted "2019-11-26"^^xsd:date ;
+    dct:description "Create and provide personalised recommendations for events to the individual"@en ;
+    rdfs:isDefinedBy "SPECIAL"^^xsd:string ;
+    rdfs:subClassOf dpv:CreatePersonalizedRecommendations ;
+    sw:term_status "accepted"@en .
+
+dpv:CreatePersonalizedRecommendations a rdfs:Class ;
+    rdfs:label "Create Personalized Recommendations"@en ;
+    dct:created "2019-11-25"^^xsd:date ;
+    dct:creator "Harshvardhan J. Pandit"^^xsd:string,
+        "Rudy Jacob"^^xsd:string ;
+    dct:date-accepted "2019-11-26"^^xsd:date ;
+    dct:description "Create and provide personalised recommendations to the individual"@en ;
+    rdfs:isDefinedBy "SPECIAL"^^xsd:string ;
+    rdfs:subClassOf dpv:ServicePersonalization ;
+    sw:term_status "accepted"@en .
+
 dpv:CreateProductRecommendations a rdfs:Class ;
     rdfs:label "Create Product Recommendations"@en ;
     dct:created "2018-12-10"^^xsd:date ;
@@ -106,7 +128,7 @@ dpv:CreateProductRecommendations a rdfs:Class ;
     dct:description "To create product recommendations e.g. suggest similar products"@en ;
     rdfs:isDefinedBy <https://www.w3.org/community/dpvcg/wiki/Purposes_for_handling_Personal_Data#High-level_categories_.28to-be-discussed.29> ;
     rdfs:seeAlso svpu:Marketing ;
-    rdfs:subClassOf dpv:ServicePersonalization ;
+    rdfs:subClassOf dpv:CreatePersonalizedRecommendations ;
     sw:term_status "accepted"@en .
 
 dpv:CustomerCare a rdfs:Class ;

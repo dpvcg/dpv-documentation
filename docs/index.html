@@ -170,8 +170,7 @@
     <section class="ednote">
       <h5>Participation</h5>
       <p>The DPVCG requests participation regarding open issues and welcomes suggestions on their resolution or mitigation. The list of open issues and their discussions to date can be found at <a href="https://www.w3.org/community/dpvcg/track/issues/open">https://www.w3.org/community/dpvcg/track/issues/open</a>. Specifically, the DPVCG kindly requests proposals to extend its initial taxonomies by additional terms, where these are missing or need refinements in order to describe specific use cases of personal data handling. A list of issues at the time of creating this document can be found <a href="#issues">here</a>. Other forms of participation such as comments and feedback are also welcome.</p>
-      <p>While we welcome participation via any and all mediums - e.g. via <a href="https://github.com/dpvcg/dpv">Github</a> pull requests or issues, emails, papers, or reports - the formal resolution of contributions will be done via the DPVCG meeting calls and mailing lists. We therefore would suggest submitting submissions there once they reach the stage for formal approval.</p>
-      <p><b>Interested participants should submit their suggestions, feedbacks, and comments by 31<sup>st</sup> July 2019 in order to have them formally reviewed according to the scheduled timeline.</b></p>
+      <p>While we welcome participation via any and all mediums - e.g., via <a href="https://github.com/dpvcg/dpv">Github</a> pull requests or issues, emails, papers, or reports - the formal resolution of contributions will be done via the DPVCG meeting calls and mailing lists. We therefore would suggest submitting suggestions there for discussion of formal approval.</p>
       <p>In order to propose/approve new terms, please include the following:</p>
         <ul>
           <li>term - suggested URI/identifier</li>
@@ -1208,6 +1207,7 @@ transferred to some recipient for a particular purpose, based on a specific lega
       <code><a href="#Sale">Sale</a></code> |
       <code><a href="#School">School</a></code> |
       <code><a href="#SecretText">Secret Text</a></code> |
+      <code><a href="#ServiceConsumptionBehavior">Service Consumption Behavior</a></code> |
       <code><a href="#Sexual">Sexual</a></code> |
       <code><a href="#SexualHistory">Sexual History</a></code> |
       <code><a href="#SexualPreference">Sexual Preference</a></code> |
@@ -1225,6 +1225,7 @@ transferred to some recipient for a particular purpose, based on a specific lega
       <code><a href="#Tracking">Tracking</a></code> |
       <code><a href="#Transaction">Transaction</a></code> |
       <code><a href="#Transactional">Transactional</a></code> |
+      <code><a href="#TVViewingBehavior">TV Viewing Behavior</a></code> |
       <code><a href="#UID">UID</a></code> |
       <code><a href="#Username">Username</a></code> |
       <code><a href="#VoiceCommunicationRecording">Voice Communication Recording</a></code> |
@@ -7086,6 +7087,48 @@ transferred to some recipient for a particular purpose, based on a specific lega
         </tbody>
       </table>
     </section>
+    <section data-dfn-for="ServiceConsumptionBehavior">
+      <h4 id="ServiceConsumptionBehavior">Service Consumption Behavior</h4>
+      <table class="definition">
+        <tbody>
+          <tr>
+            <td>Term:</td>
+            <td><code><dfn>ServiceConsumptionBehavior</dfn></code></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>Information about the consumption of a service by an individual. Examples: time and duration of consumption.</td>
+          </tr>
+          <tr>
+            <td>Subclass Of:</td>
+            <td>
+              <a href="http://www.w3.org/ns/dpv#Behavioral">dpv:Behavioral</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>accepted</td>
+          </tr>
+          <tr>
+            <td>Defined by:</td>
+            <td>
+              SPECIAL
+            </td>
+          </tr>
+          <tr>
+            <td>Created:</td>
+            <td><time>2019-11-25</time></td>
+          </tr>
+          <tr>
+            <td>Contributor(s):</td>
+            <td>
+              Harshvardhan J. Pandit, 
+              Rudy Jacob
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <section data-dfn-for="Sexual">
       <h4 id="Sexual">Sexual</h4>
       <table class="definition">
@@ -7807,6 +7850,48 @@ transferred to some recipient for a particular purpose, based on a specific lega
         </tbody>
       </table>
     </section>
+    <section data-dfn-for="TVViewingBehavior">
+      <h4 id="TVViewingBehavior">TV Viewing Behavior</h4>
+      <table class="definition">
+        <tbody>
+          <tr>
+            <td>Term:</td>
+            <td><code><dfn>TVViewingBehavior</dfn></code></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>Information that relates to an individual&#39;s TV viewing behavior, such as timestamps of channel change, duration of viewership, content consumed</td>
+          </tr>
+          <tr>
+            <td>Subclass Of:</td>
+            <td>
+              <a href="http://www.w3.org/ns/dpv#ServiceConsumptionBehavior">dpv:ServiceConsumptionBehavior</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>accepted</td>
+          </tr>
+          <tr>
+            <td>Defined by:</td>
+            <td>
+              SPECIAL
+            </td>
+          </tr>
+          <tr>
+            <td>Created:</td>
+            <td><time>2019-11-25</time></td>
+          </tr>
+          <tr>
+            <td>Contributor(s):</td>
+            <td>
+              Harshvardhan J. Pandit, 
+              Rudy Jacob
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <section data-dfn-for="UID">
       <h4 id="UID">UID</h4>
       <table class="definition">
@@ -8099,6 +8184,8 @@ transferred to some recipient for a particular purpose, based on a specific lega
       <code><a href="#CommercialInterest">Commercial Interest</a></code> |
       <code><a href="#CommercialResearch">Commercial Research</a></code> |
       <code><a href="#Context">Context</a></code> |
+      <code><a href="#CreateEventRecommendations">Create Event Recommendations</a></code> |
+      <code><a href="#CreatePersonalizedRecommendations">Create Personalized Recommendations</a></code> |
       <code><a href="#CreateProductRecommendations">Create Product Recommendations</a></code> |
       <code><a href="#CustomerCare">Customer Care</a></code> |
       <code><a href="#CustomerRelationshipManagement">Customer Relationship Management</a></code> |
@@ -8406,6 +8493,90 @@ transferred to some recipient for a particular purpose, based on a specific lega
         </tbody>
       </table>
     </section>
+    <section data-dfn-for="CreateEventRecommendations">
+      <h4 id="CreateEventRecommendations">Create Event Recommendations</h4>
+      <table class="definition">
+        <tbody>
+          <tr>
+            <td>Term:</td>
+            <td><code><dfn>CreateEventRecommendations</dfn></code></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>Create and provide personalised recommendations for events to the individual</td>
+          </tr>
+          <tr>
+            <td>Subclass Of:</td>
+            <td>
+              <a href="http://www.w3.org/ns/dpv#CreatePersonalizedRecommendations">dpv:CreatePersonalizedRecommendations</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>accepted</td>
+          </tr>
+          <tr>
+            <td>Defined by:</td>
+            <td>
+              SPECIAL
+            </td>
+          </tr>
+          <tr>
+            <td>Created:</td>
+            <td><time>2019-11-25</time></td>
+          </tr>
+          <tr>
+            <td>Contributor(s):</td>
+            <td>
+              Harshvardhan J. Pandit, 
+              Rudy Jacob
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section data-dfn-for="CreatePersonalizedRecommendations">
+      <h4 id="CreatePersonalizedRecommendations">Create Personalized Recommendations</h4>
+      <table class="definition">
+        <tbody>
+          <tr>
+            <td>Term:</td>
+            <td><code><dfn>CreatePersonalizedRecommendations</dfn></code></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>Create and provide personalised recommendations to the individual</td>
+          </tr>
+          <tr>
+            <td>Subclass Of:</td>
+            <td>
+              <a href="http://www.w3.org/ns/dpv#ServicePersonalization">dpv:ServicePersonalization</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>accepted</td>
+          </tr>
+          <tr>
+            <td>Defined by:</td>
+            <td>
+              SPECIAL
+            </td>
+          </tr>
+          <tr>
+            <td>Created:</td>
+            <td><time>2019-11-25</time></td>
+          </tr>
+          <tr>
+            <td>Contributor(s):</td>
+            <td>
+              Harshvardhan J. Pandit, 
+              Rudy Jacob
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <section data-dfn-for="CreateProductRecommendations">
       <h4 id="CreateProductRecommendations">Create Product Recommendations</h4>
       <table class="definition">
@@ -8421,7 +8592,7 @@ transferred to some recipient for a particular purpose, based on a specific lega
           <tr>
             <td>Subclass Of:</td>
             <td>
-              <a href="http://www.w3.org/ns/dpv#ServicePersonalization">dpv:ServicePersonalization</a>
+              <a href="http://www.w3.org/ns/dpv#CreatePersonalizedRecommendations">dpv:CreatePersonalizedRecommendations</a>
             </td>
           </tr>
           <tr>

@@ -1537,6 +1537,17 @@ dpv:SecretText a rdfs:Class ;
     rdfs:subClassOf dpv:Authenticating ;
     sw:term_status "accepted"@en .
 
+dpv:ServiceConsumptionBehavior a rdfs:Class ;
+    rdfs:label "Service Consumption Behavior"@en ;
+    dct:created "2019-11-25"^^xsd:date ;
+    dct:creator "Harshvardhan J. Pandit"^^xsd:string,
+        "Rudy Jacob"^^xsd:string ;
+    dct:date-accepted "2019-11-26"^^xsd:date ;
+    dct:description "Information about the consumption of a service by an individual. Examples: time and duration of consumption."@en ;
+    rdfs:isDefinedBy "SPECIAL"^^xsd:string ;
+    rdfs:subClassOf dpv:Behavioral ;
+    sw:term_status "accepted"@en .
+
 dpv:Sexual a rdfs:Class ;
     rdfs:label "Sexual"@en ;
     dct:created "2019-04-04"^^xsd:date ;
@@ -1648,6 +1659,17 @@ dpv:SpecialCategoryPersonalData a rdfs:Class ;
     rdfs:comment "trade union membership, which is explicitly included in the taxative listing in GDPR Art. 9 (1), is not covered yet."@en ;
     rdfs:isDefinedBy <https://eur-lex.europa.eu/eli/reg/2016/679/art_9/par_1/oj> ;
     rdfs:subClassOf dpv:PersonalDataCategory ;
+    sw:term_status "accepted"@en .
+
+dpv:TVViewingBehavior a rdfs:Class ;
+    rdfs:label "TV Viewing Behavior"@en ;
+    dct:created "2019-11-25"^^xsd:date ;
+    dct:creator "Harshvardhan J. Pandit"^^xsd:string,
+        "Rudy Jacob"^^xsd:string ;
+    dct:date-accepted "2019-11-26"^^xsd:date ;
+    dct:description "Information that relates to an individual's TV viewing behavior, such as timestamps of channel change, duration of viewership, content consumed"@en ;
+    rdfs:isDefinedBy "SPECIAL"^^xsd:string ;
+    rdfs:subClassOf dpv:ServiceConsumptionBehavior ;
     sw:term_status "accepted"@en .
 
 dpv:Tattoo a rdfs:Class ;
