@@ -16,6 +16,8 @@ There are 3 scripts to executre for each of the three tasks.
 
 `./002_parse_csv_to_rdf.py` will create RDF serialisations for DPV using data from CSV. It will create different serialisation files for each 'module' and also for DPV combined.
 
+In between steps 2 and 3, there can be a series of tests done to ensure the RDF is generated correctly. For this, some basic SHACL constraints are defined in `shacl_shapes`.
+
 `./003_generate_respec_html.py` will generate HTML documentation for DPV from RDF.
 
 
@@ -58,6 +60,16 @@ The general flow of steps in the script is along the following lines:
 2. This creates a RDF graph using `rdflib` and extracts classes and properties from it in separate variables as `{module}_classes` and `{module}_properties`
 3. Create HTML using a `jinja2` template, which is located in `jinja2_resources`. The tempalte for dpv is `template_dpv.jinja2`.
 4. The template uses a macro to repeat the same table and metadata records for each module and term. The macro is defined in `macro_term_table.jinja2`. The template file itself contains the other information such as headlines and paragraphs.
+
+### Testing using SHACL
+
+The folder `shacl_shapes` holds the constraints in `shapes.ttl` to verify the vocabulary terms contain some basic annotations. The script `verify.py` executes the SHACL validator (currently hardcoded to use the [TopBraid SHACL](https://github.com/TopQuadrant/shacl) binary as `shaclvalidate.sh`), retrieves the results, runs a SPARQL query on them to get the failing nodes and messages.
+
+The script uses `DATA_PATHS` to declare what data files should be validated. Currently, it will only validate `Turtle (.tt)` files for simplicity as all files are duplicate serialisations of each other. The variable `SHAPES` declares the list of shape files to use. For each folder in `DATA_PATHS`, the script will execute the SHACL binary to check constraints defined in each of the `SHAPES` files.
+
+To execute the tests, and to use the TopBraid SHACL binary, download the latest release from [maven](https://repo1.maven.org/maven2/org/topbraid/shacl/), extract it somewhere and note the path of the folder. Export `SHACLROOT` in the shell the script is going to run in (or e.g. save it in the bash profile) to the path of the folder. To be more precise, `$SHACLROOT/shaclvalidate.sh` should result in the binary being executed. 
+
+The output of the script lists the data and shapes files being used in the validation process, the number of errors found, and a list of data nodes and the corresponding failure message.
 
 ## FAQ
 
