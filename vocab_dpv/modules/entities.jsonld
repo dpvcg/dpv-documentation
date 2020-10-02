@@ -46,7 +46,52 @@
     "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": [
       {
         "@language": "en",
-        "@value": "approved"
+        "@value": "accepted"
+      }
+    ]
+  },
+  {
+    "@id": "http://www.w3.org/ns/dpv#DataSubProcessor",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ],
+    "http://purl.org/dc/terms/created": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2019-06-04"
+      }
+    ],
+    "http://purl.org/dc/terms/creator": [
+      {
+        "@value": "Harshvardhan J. Pandit"
+      }
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@language": "en",
+        "@value": "A processor engaged by another processor"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
+      {
+        "@id": "https://eur-lex.europa.eu/eli/reg/2016/679/art_28/par_2/pnt_g/oj"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Data Sub-Processor"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "http://www.w3.org/ns/dpv#DataProcessor"
+      }
+    ],
+    "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": [
+      {
+        "@language": "en",
+        "@value": "proposed"
       }
     ]
   },
@@ -87,51 +132,6 @@
     "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
       {
         "@id": "http://www.w3.org/ns/dpv#DataSubject"
-      }
-    ],
-    "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": [
-      {
-        "@language": "en",
-        "@value": "proposed"
-      }
-    ]
-  },
-  {
-    "@id": "http://www.w3.org/ns/dpv#DataSubProcessor",
-    "@type": [
-      "http://www.w3.org/2000/01/rdf-schema#Class"
-    ],
-    "http://purl.org/dc/terms/created": [
-      {
-        "@type": "http://www.w3.org/2001/XMLSchema#date",
-        "@value": "2019-06-04"
-      }
-    ],
-    "http://purl.org/dc/terms/creator": [
-      {
-        "@value": "Harshvardhan J. Pandit"
-      }
-    ],
-    "http://purl.org/dc/terms/description": [
-      {
-        "@language": "en",
-        "@value": "A processor engaged by another processor"
-      }
-    ],
-    "http://www.w3.org/2000/01/rdf-schema#isDefinedBy": [
-      {
-        "@id": "https://eur-lex.europa.eu/eli/reg/2016/679/art_28/par_2/pnt_g/oj"
-      }
-    ],
-    "http://www.w3.org/2000/01/rdf-schema#label": [
-      {
-        "@language": "en",
-        "@value": "Data Sub-Processor"
-      }
-    ],
-    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
-      {
-        "@id": "http://www.w3.org/ns/dpv#DataProcessor"
       }
     ],
     "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": [
@@ -188,7 +188,7 @@
     "http://www.w3.org/2003/06/sw-vocab-status/ns#term_status": [
       {
         "@language": "en",
-        "@value": "approved"
+        "@value": "accepted"
       }
     ]
   }
