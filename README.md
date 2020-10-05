@@ -18,7 +18,7 @@ There are 3 scripts to executre for each of the three tasks.
 
 In between steps 2 and 3, there can be a series of tests done to ensure the RDF is generated correctly. For this, some basic SHACL constraints are defined in `shacl_shapes`.
 
-`./003_generate_respec_html.py` will generate HTML documentation for DPV from RDF.
+`./003_generate_respec_html.py` will generate HTML documentation for DPV and DPV-GDPR from RDF.
 
 
 ## How everything works
@@ -52,7 +52,8 @@ The variables for RDF inputs and HTML outputs are:
 
 * `IMPORT_DPV_MODULES_PATH` defines where the RDF for DPV modules are loaded from, with default value `./vocab_dpv/modules`
 * `IMPORT_DPV_GDPR_PATH` defines where the RDF for DPV-GDPR module is loaded from,  with default value `./vocab_dpv_gdpr`
-* `EXPORT_HTML_PATH` defines where the output HTML is stored, with default value `./docs`
+* `EXPORT_DPV_HTML_PATH` defines where the output HTML for DPV documentation is stored, with default value `./docs`, the generated file is `index.html`
+* `EXPORT_DPV_GDPR_HTML_PATH` defines where the output HTML for DPV-GDPR documentation is stored, with default value `./docs/dpv-gdpr`, the generated file is `index.html`
 
 The general flow of steps in the script is along the following lines:
 

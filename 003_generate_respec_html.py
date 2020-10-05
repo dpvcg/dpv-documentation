@@ -7,7 +7,8 @@
 
 IMPORT_DPV_MODULES_PATH = './vocab_dpv/modules'
 IMPORT_DPV_GDPR_PATH = './vocab_dpv_gdpr'
-EXPORT_HTML_PATH = './docs'
+EXPORT_DPV_HTML_PATH = './docs'
+EXPORT_DPV_GDPR_HTML_PATH = './docs/dpv-gdpr'
 
 from rdflib import Graph, Namespace
 from rdflib import URIRef
@@ -82,16 +83,16 @@ template_env = Environment(
     autoescape=True, trim_blocks=True, lstrip_blocks=True)
 template_env.filters.update(JINJA2_FILTERS)
 template = template_env.get_template('template_dpv.jinja2')
-with open(f'{EXPORT_HTML_PATH}/index.html', 'w+') as fd:
+with open(f'{EXPORT_DPV_HTML_PATH}/index.html', 'w+') as fd:
     fd.write(template.render(**TEMPLATE_DATA))
-DEBUG(f'wrote DPV spec at f{EXPORT_HTML_PATH}/index.html')
+DEBUG(f'wrote DPV spec at f{EXPORT_DPV_HTML_PATH}/index.html')
 
 # dpv-gdpr
 
 load_data('dpv_gdpr', f'{IMPORT_DPV_GDPR_PATH}/dpv-gdpr.ttl')
 template = template_env.get_template('template_dpv_gdpr.jinja2')
-with open(f'{EXPORT_HTML_PATH}/dpv-gdpr.html', 'w+') as fd:
+with open(f'{EXPORT_DPV_GDPR_HTML_PATH}/index.html', 'w+') as fd:
     fd.write(template.render(**TEMPLATE_DATA))
-DEBUG(f'wrote DPV-GDPR spec at f{EXPORT_HTML_PATH}/dpv-gdpr.html')
+DEBUG(f'wrote DPV-GDPR spec at f{EXPORT_DPV_GDPR_HTML_PATH}/index.html')
 
 DEBUG('--- END ---')
