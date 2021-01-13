@@ -146,7 +146,7 @@ class DataGraph(object):
             self.objects = {}
 
         # instantiate objects from class data
-        DEBUG('loading objects from graph')
+        # DEBUG('loading objects from graph')
 
         collections = []
 
@@ -305,3 +305,57 @@ class DataGraph(object):
                 entity = item
             return_list.append(entity)
         return return_list
+
+    def subclasses(self, classname):
+        """returns subclasses of given term"""
+
+        if type(classname) is RDFS_Resource:
+            # if classname is a RDFS_Resource object, just get its iri
+            classname = classname.iri
+        elif type(classname) is str:
+            # otherwise check if it is a string
+            # if yes, then check if it already exists in list of objects
+            # if not, it could be prefixed key:value syntax
+            # try to derive iri from prefix
+            # if all fails, return None
+            if classname not in self.objects:
+                if '_' not in classname:
+                    # prefix_label syntax
+                    # DEBUG('classname is not prefixed')
+                    return None
+                # classname is prefixed
+                classname = self._get_iri_from_prefix(classname)
+                if classname is None:
+                    # DEBUG('iri could not be generated from prefix')
+                    return None
+        else:
+            # DEBUG('classname is neither rdfs object nor string')
+            return None
+        if classname not in self.objects:
+            # DEBUG('classname could not be found in objects')
+            return None
+
+        # at this point, classname is definitely in self.objects
+        children = []
+        class_obj = self.objects[classname]
+        if class_obj is None:
+            # DEBUG('classname could not be found in objects')
+            return None
+        # go over each object, check if it has a rdf_type whose value
+        # matches the object ; if yes, collect it
+        # DEBUG(f'class: {class_obj}')
+        for obj in self.objects.values():
+            # DEBUG(f'term: {obj} keys: {obj.metadata.keys()}')
+            if not 'rdfs_subClassOf' in obj.metadata:
+                continue
+            parents = obj.rdfs_subClassOf
+            # DEBUG(f'term: {obj} parents: {parents}')
+            if type(parents) is list:
+                if class_obj in parents:
+                    children.append(obj)
+            elif type(parents) is RDFS_Resource:
+                # DEBUG(f'term: {obj} parents: {parents} class: {class_obj} equal: {class_obj == parents}')
+                if parents is class_obj:
+                    children.append(obj)
+
+        return children

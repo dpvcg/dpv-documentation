@@ -14,6 +14,7 @@ DPV_DOCUMENT_ID = '11bjy424zwC_j4bj9pnhmmI8o7RgrJfX4NgsZ31iR3Wo'
 # The sheet names are assumed to be valid IRIs
 # If they are not, escape them for IRI/HTML representation
 DPV_SHEETS = (
+    # DPV
     'BaseOntology',
     'BaseOntology_properties',
     'PersonalDataCategory',
@@ -24,9 +25,12 @@ DPV_SHEETS = (
     'TechnicalOrganisationalMeasure',
     'TechnicalOrganisationalMeasure_properties',
     'Entities',
+    'Entities_properties',
     'Consent',
     'Consent_properties',
-    'LegalBasis',
+    # DPV-GDPR
+    'GDPR_LegalBasis',
+    'GDPR_LegalRights',
     )
 
 from urllib import request

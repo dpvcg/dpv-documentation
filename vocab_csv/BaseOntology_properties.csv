@@ -1,16 +1,18 @@
-"Term","Label","Description","domain","range","ParentProperty","RelatedTerms","Relation","Comment","Source","CreationDate","Status","Contributos","AcceptanceDate","Resolution"
-"hasPersonalDataCategory","has personal data category","This property associates a personal data category with an instance of legal data handling or consent","","dpv:PersonalDataCategory","","","","","DPVCG,SPECIAL","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasProcessing","has processing","This property associates a data processing category with an instance of legal data handling or consent","","dpv:Processing","","","","","DPVCG,SPECIAL","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasPurpose","has purpose","This property associates a purpose with an instance of legal data handling or consent","","dpv:Purpose","","","","","DPVCG,SPECIAL","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasRecipient","has recipient","This property associates a recipient with an instance of legal data handling or consent","","dpv:Recipient","","","","","DPVCG,SPECIAL","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasTechnicalOrganisationalMeasure","has technical and organisational measure","This property associates a technical/organisational measure with an instance of legal data handling or consent","","dpv:TechnicalOrganisationalMeasure","","","","","DPVCG","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasLegalBasis","has legal basis","This property associates an instance of legal data handling with its underlying legal basis","","dpv:LegalBasis","","","","","DPVCG","2019-04-04","accepted","Axel Polleres, Javier Ferenandez","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasDataSubject","has data subject","This property associates a data subject with an instance of legal data handling or consent","","dpv:DataSubject","","","","","DPVCG","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
-"hasDataController","has data controller","This property associates a data controller with an instance of legal data handling or consent","","dpv:Datacontroller","","","","","DPVCG","2019-04-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
-","2019-04-05","https://www.w3.org/2019/04/05-dpvcg-minutes.html"
+"Term","Label","Description","domain","range","ParentProperty","RelatedTerms","Relation","Comment","Source","Created","Modified","Status","Contributos","Resolution","","","","","","","","","","","","",""
+"hasPersonalDataCategory","has personal data category","Indicates association with a Personal Data Category.","","","","","","","(SPECIAL Project,https://www.specialprivacy.eu/)","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasProcessing","has processing","Indicates association with a Processing (of personal data) instance or category.","","","","","","","(SPECIAL Project,https://www.specialprivacy.eu/)","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasPurpose","has purpose","Indicates assocation with a Purpose (of processing personal data).","","","","","","","(SPECIAL Project,https://www.specialprivacy.eu/)","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasRecipient","has recipient","Indicates a recipient of personal data.","","","","","","","(SPECIAL Project,https://www.specialprivacy.eu/)","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasTechnicalOrganisationalMeasure","has technical and organisational measure","Indicates use of a Technical or Organisational measure.","","","","","","","","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasLegalBasis","has legal basis","Indicates applicability of a Legal Basis.","","","","","","","","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasDataSubject","has data subject","Indicates association with a specific Data Subject or a group or category of Data Subjects.","","","","","","","","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasDataController","has data controller","Indicates association with a Data Controller.","","","","","","","","2019-04-04","2020-11-04","accepted","Axel Polleres, Javier Ferenandez, Harshvardhan J. Pandit, Mark Lizar, Bud Bruegger
+","https://www.w3.org/2019/04/05-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasRight","has right","Indicates applicability of a Right.","","","","","","","","2020-11-18","","accepted","Harshvardhan J. Pandit","https://www.w3.org/2020/11/18-dpvcg-minutes.html","","","","","","","","","","","","",""
+"hasRisk","has risk","Indicates applicability of a Risk.","","","","","","","","2020-11-18","","accepted","Harshvardhan J. Pandit","https://www.w3.org/2020/11/18-dpvcg-minutes.html","","","","","","","","","","","","",""

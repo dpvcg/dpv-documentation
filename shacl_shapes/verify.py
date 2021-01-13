@@ -10,6 +10,7 @@ DATA_PATHS = [
     '../vocab_dpv',
     '../vocab_dpv/modules',
     '../vocab_dpv_gdpr',
+    '../vocab_dpv_gdpr/modules',
 ]
 
 # this is the list of shapes to be validated against

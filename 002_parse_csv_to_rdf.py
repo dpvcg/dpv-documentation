@@ -22,6 +22,7 @@ IMPORT_CSV_PATH = './vocab_csv'
 EXPORT_DPV_PATH = './vocab_dpv'
 EXPORT_DPV_MODULE_PATH = './vocab_dpv/modules'
 EXPORT_DPV_GDPR_PATH = './vocab_dpv_gdpr'
+EXPORT_DPV_GDPR_MODULE_PATH = './vocab_dpv_gdpr/modules'
 
 # serializations in the form of extention: rdflib name
 RDF_SERIALIZATIONS = {
@@ -95,15 +96,17 @@ NAMESPACES = {
 DPV_Class = namedtuple('DPV_Class', [
     'term', 'rdfs_label', 'dct_description', 'rdfs_subclassof', 
     'rdfs_seealso', 'relation', 'rdfs_comment', 'rdfs_isdefinedby', 
-    'dct_created', 'sw_termstatus', 'dct_creator', 
-    'dct_dateaccepted', 'resolution'])
+    'dct_created', 'dct_modified', 'sw_termstatus', 'dct_creator', 
+    'resolution'])
 
 DPV_Property = namedtuple('DPV_Property', [
     'term', 'rdfs_label', 'dct_description', 
     'rdfs_domain', 'rdfs_range', 'rdfs_subpropertyof',
     'rdfs_seealso', 'relation', 'rdfs_comment', 'rdfs_isdefinedby', 
-    'dct_created', 'sw_termstatus', 'dct_creator', 
-    'dct_dateaccepted', 'resolution'])
+    'dct_created', 'dct_modified', 'sw_termstatus', 'dct_creator', 
+    'resolution'])
+
+LINKS = {}
 
 
 def extract_terms_from_csv(filepath, Class):
@@ -135,6 +138,7 @@ def add_common_triples_for_all_terms(term, graph):
     terms: data structure of term; is object with attributes
     graph: rdflib graph
     returns: None'''
+
     # rdfs:label
     graph.add((BASE[f'{term.term}'], RDFS.label, Literal(term.rdfs_label, lang='en')))
     # dct:description
@@ -163,14 +167,23 @@ def add_common_triples_for_all_terms(term, graph):
         graph.add((BASE[f'{term.term}'], RDFS.comment, Literal(term.rdfs_comment, lang='en')))
     # rdfs:isDefinedBy
     if term.rdfs_isdefinedby:
-        links = [l.strip() for l in term.rdfs_isdefinedby.split(',')]
-        for link in links:
+        links = [l.strip() for l in term.rdfs_isdefinedby.replace('(','').replace(')','').split(',')]
+        link_iterator = iter(links)
+        for label in link_iterator:
+            link = next(link_iterator)
+            # add link to a temp file so that the label can be displayed in HTML
+            if not link in LINKS:
+                LINKS[link] = label
+            # add link to graph
             if link.startswith('http'):
                 graph.add((BASE[f'{term.term}'], RDFS.isDefinedBy, URIRef(link)))
             else:
                 graph.add((BASE[f'{term.term}'], RDFS.isDefinedBy, Literal(link, datatype=XSD.string)))
     # dct:created
     graph.add((BASE[f'{term.term}'], DCT.created, Literal(term.dct_created, datatype=XSD.date)))
+    # dct:modified
+    if term.dct_modified:
+        graph.add((BASE[f'{term.term}'], DCT.modified, Literal(term.dct_modified, datatype=XSD.date)))
     # sw:term_status
     graph.add((BASE[f'{term.term}'], SW.term_status, Literal(term.sw_termstatus, lang='en')))
     # dct:creator
@@ -178,9 +191,6 @@ def add_common_triples_for_all_terms(term, graph):
         authors = [a.strip() for a in term.dct_creator.split(',')]
         for author in authors:
             graph.add((BASE[f'{term.term}'], DCT.creator, Literal(author, datatype=XSD.string)))
-    # dct:date-accepted
-    if term.dct_dateaccepted:
-        graph.add((BASE[f'{term.term}'], DCT['date-accepted'], Literal(term.dct_dateaccepted, datatype=XSD.date)))
     # resolution
         # do nothing
 
@@ -195,8 +205,8 @@ def add_triples_for_classes(classes, graph):
 
     for cls in classes:
         # only add accepted classes
-        # if cls.sw_termstatus != "accepted":
-        #     continue
+        if cls.sw_termstatus != "accepted":
+            continue
         # rdf:type
         graph.add((BASE[f'{cls.term}'], RDF.type, RDFS.Class))
         # rdfs:subClassOf
@@ -303,6 +313,7 @@ DPV_CSV_FILES = {
         },
     'entities': {
         'classes': f'{IMPORT_CSV_PATH}/Entities.csv',
+        'properties': f'{IMPORT_CSV_PATH}/Entities_properties.csv'
         },
     'consent': {
         'classes': f'{IMPORT_CSV_PATH}/Consent.csv',
@@ -346,11 +357,45 @@ serialize_graph(DPV_GRAPH, f'{EXPORT_DPV_PATH}/dpv')
 
 BASE = NAMESPACES['dpv-gdpr']
 
+DPV_GDPR_GRAPH = Graph()
+
+DPV_GDPR_CSV_FILES = {
+    'legal_basis': {
+        'classes': f'{IMPORT_CSV_PATH}/GDPR_LegalBasis.csv',
+        },
+    'rights': {
+        'classes': f'{IMPORT_CSV_PATH}/GDPR_LegalRights.csv',
+        },
+    }
+
+for name, module in DPV_GDPR_CSV_FILES.items():
+    graph = Graph()
+    for prefix, namespace in NAMESPACES.items():
+        graph.namespace_manager.bind(prefix, namespace)
+    if 'classes' in module:
+        classes = extract_terms_from_csv(module['classes'], DPV_Class)
+        DEBUG(f'there are {len(classes)} classes in {name}')
+        add_triples_for_classes(classes, graph)
+    if 'properties' in module:
+        properties = extract_terms_from_csv(module['properties'], DPV_Property)
+        DEBUG(f'there are {len(properties)} properties in {name}')
+        add_triples_for_properties(properties, graph)
+    serialize_graph(graph, f'{EXPORT_DPV_GDPR_MODULE_PATH}/{name}')
+    DPV_GDPR_GRAPH += graph
+
 graph = Graph()
+graph.load('dpv-gdpr-ontology-metadata.ttl', format='turtle')
+DPV_GDPR_GRAPH += graph
+
 for prefix, namespace in NAMESPACES.items():
-    graph.namespace_manager.bind(prefix, namespace)
-classes = extract_terms_from_csv(f'{IMPORT_CSV_PATH}/LegalBasis.csv', DPV_Class)
-add_triples_for_classes(classes, graph)
-serialize_graph(graph, f'{EXPORT_DPV_GDPR_PATH}/dpv-gdpr')
+    DPV_GDPR_GRAPH.namespace_manager.bind(prefix, namespace)
+serialize_graph(DPV_GDPR_GRAPH, f'{EXPORT_DPV_GDPR_PATH}/dpv-gdpr')
 
 # #############################################################################
+
+# Save collected links as resource for generating HTML A HREF in JINJA2 templates
+# file is in jinja2_resources/links_labels.json
+
+import json
+with open('jinja2_resources/links_label.json', 'w') as fd:
+    fd.write(json.dumps(LINKS))

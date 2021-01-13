@@ -31,18 +31,29 @@
             </td>
           </tr>
           {% endif %}
+          {% set children = term|subclasses %}
+          {% if children %}
           <tr>
+            <td>Superclass Of:</td>
+            <td>
+              {% for child in children %}
+              <a href="{{child.iri}}">{{child|prefix_this}}</a>{{", " if not loop.last}}
+              {% endfor %}
+            </td>
+          </tr>
+          {% endif %}
+         {#  <tr>
             <td>Status:</td>
             <td>{{term.sw_term_status}}</td>
-          </tr>
+          </tr> #}
           {% if term.rdfs_isDefinedBy %}
           <tr>
-            <td>Defined by:</td>
+            <td>Source:</td>
             <td>
             {% if term.rdfs_isDefinedBy is sequence and not term.rdfs_isDefinedBy is string %}{% for parent in term.rdfs_isDefinedBy|sort %}
-              {{parent}}{{', ' if not loop.last }}
+              <a href="{{parent}}">{{parent|saved_label}}</a>{{', ' if not loop.last }}
               {% endfor %}{% else %}
-              {{term.rdfs_isDefinedBy}}
+              <a href="{{term.rdfs_isDefinedBy}}">{{term.rdfs_isDefinedBy|saved_label}}</a>
               {% endif %}
             </td>
           </tr>
@@ -51,10 +62,10 @@
             <td>Created:</td>
             <td><time>{{term.dct_created}}</time></td>
           </tr>
-          {% if term.dct_date_approved %}
+          {% if term.dct_modified %}
           <tr>
-            <td>Approved:</td>
-            <td><time>{{term.dct_date_accepted}}</time></td>
+            <td>Modified:</td>
+            <td><time>{{term.dct_modified}}</time></td>
           </tr>
           {% endif %}
           {% if term.dct_creator %}
@@ -126,12 +137,12 @@
           </tr>
           {% if term.rdfs_isDefinedBy %}
           <tr>
-            <td>Defined by:</td>
+            <td>Source:</td>
             <td>
             {% if term.rdfs_isDefinedBy is sequence and not term.rdfs_isDefinedBy is string %}{% for parent in term.rdfs_isDefinedBy|sort %}
-              {{parent}}{{', ' if not loop.last }}
+              <a href="{{parent}}">{{parent|saved_label}}</a>{{', ' if not loop.last }}
               {% endfor %}{% else %}
-              {{term.rdfs_isDefinedBy}}
+              <a href="{{term.rdfs_isDefinedBy}}">{{term.rdfs_isDefinedBy|saved_label}}</a>
               {% endif %}
             </td>
           </tr>
