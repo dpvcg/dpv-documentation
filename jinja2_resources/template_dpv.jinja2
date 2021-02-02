@@ -809,7 +809,7 @@
       <img title="DPV Entities Vocabulary" alt="DPV Entities vocabulary" src="diagrams/legalentities.png">
       <figcaption>Concepts for Entities in DPV</figcaption>
     </figure>
-  <p class="note">The <a href="#vocab-base">DPV core vocabulary</a> consists concepts of [=DataSubject=], [=DataController=], and [=Recipient=] which are subclasses of [=LegalEntity=]. Consequently, they are not described in this section to avoid duplicity.</p>
+  <p class="note">The <a href="#vocab-base">DPV core vocabulary</a> includes the concepts of [=DataSubject=], [=DataController=], and [=Recipient=] which are subclasses of [=LegalEntity=]. Consequently, they are not described in this section to avoid duplicity.</p>
   <p>To describe the entities that act as recipients regarding personal data and its processing, the concepts of [=DataProcessor=], [=DataSubProcessor=], and [=ThirdParty=] are defined. Defining recipients is important in the context of data protection and privacy as it allows tracking the entities personal data is shared/transfered with. The concepts of [=Child=] and [=VulnerableDataSubject=] represent specific categories of data subjects based on relevance in legal requirements. The concept [=Authority=] represents an entity with legal authority, and is extended to represent [=DataProtectionAuthority=] for a specific authority concerned with data protection and privacy. To represent an 'agent' of an organisation, the concept [=Representative=] is provided. Similarly, [=DataProtectionOfficer=] refers to a specific entity associated with monitoring data protection and privacy within (or on behalf of) an organisation.</p>
   <p class="note">The concept 'child' can be legally distinct from 'minor', although they are also used as synonyms in several cases. DPV uses 'child' as the commonly used term to signify an individual below a certain legally defined age. This is influenced from the use of the term 'child' within the GDPR and by CJEU in its judgements. It is important to note that the relevant age for determining a child (or a minor child) varies by jurisdiction.</p>
   <p>To represent information about entities, DPV provides the following properties: [=hasName=] to indicate name, [=hasAddress=] to indicate address, [=hasContact=] to indicate contact or communication channels, [=hasIdentifier=] to indicate an identifier associated with the entity, and [=hasRepresentative=] to indicate an 'agent' or representative of the entity.</p>
@@ -820,7 +820,7 @@
   {% endif %}
   {% if entities_properties %}
   <section id="entities-properties">
-    {{ table_classes(entities_properties) }}
+    {{ table_properties(entities_properties) }}
   </section>
   {% endif %}
 </section>
