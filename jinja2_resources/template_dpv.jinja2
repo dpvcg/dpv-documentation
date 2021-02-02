@@ -510,7 +510,7 @@
       <figcaption>Concepts for Personal Data Categories in DPV</figcaption>
     </figure>
     <p>While this taxonomy is by no means exhaustive, the aim is to provide a sufficient coverage of abstract categories of personal data which can be extended using the subclass mechanism to represent concepts used in the real-world.</p>
-    <p class="note">Regulations such as the GDPR define personal data at an abstract level as information (directly or indirectly) associated with an individual or a category of individuals. DPV defines classes representing categories that are inclusive of information associated with them (e.g. name consisting of first name, last name), with their instances representing specific elements of persona data (e.g. “John Doe” as name).</p>
+    <p class="note">Regulations such as the GDPR define personal data at an abstract level as information (directly or indirectly) associated with an individual or a category of individuals. DPV defines classes representing categories that are inclusive of information associated with them (e.g. name consisting of first name, last name), with their instances representing specific elements of personal data (e.g. “John Doe” as name).</p>
     <p>The categories defined in the personal data categories taxonomy can be used directly or further extended by subclassing the respective classes to depict specialised concepts, such as “likes regarding movies” or combined with classes to indicate specific contexts. The class [=DerivedPersonalData=] provides one such context to indicate information has been derived from existing information, e.g. inference of opinions from social media. Additional classes can be defined to specify contexts such as use of machine learning, accuracy, and source. Similarly, the class [=SpecialCategoryPersonalData=] represents categories that are ‘special’ or ‘sensitive’ and require additional conditions, e.g. as per <a href="https://eur-lex.europa.eu/eli/reg/2016/679/art_9/oj">GDPR’s Article 9</a>.</p>
     <aside class="example" title="Declaring Likes are a Special Category and are Derived or Inferred">
       <pre>:SocialMediaLikes rdfs:subClassOf dpv:Like,
@@ -532,11 +532,11 @@
         </tr>
         <tr>
           <td>[=SpecialCategoryPersonalData=]</td>
-          <td>Indicate personal data is sensitive or belongs to a special category</td>
+          <td>Indicates that personal data is sensitive or belongs to a special category</td>
         </tr>
         <tr>
           <td>[=DerivedPersonalData=]</td>
-          <td>Indicate personal data is derived or inferred</td>
+          <td>Indicates that personal data is derived or inferred</td>
         </tr>
       </tbody>
     </table>
