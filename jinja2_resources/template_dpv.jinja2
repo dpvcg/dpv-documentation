@@ -721,13 +721,13 @@
       <img title="DPV Technical and Organisational Measures Vocabulary" alt="DPV Technical and Organisational Measures vocabulary" src="diagrams/technicalorganisationalmeasures.png">
       <figcaption>Concepts for Technical and Organisational Measures in DPV</figcaption>
     </figure>
-    <p>To represent these requirements, the DPV defines a hierarchical taxonomy of technical and organisational measures through the top-level concept of [=TechnicalOrganisationalMeasure=], which is further distinguished as [=TechnicalMeasure=] and [=OrganisationalMeasure=]. A technical measure is an implementation detail or technology used to achieve a specific goal or object, such as authentical protocol used to validate identity. In contrast, an organisational measure is a process or procedure used by the organisation, for example authorisation procedure to decide who should be granted access within an organisation.</p>
+    <p>To represent these requirements, the DPV defines a hierarchical taxonomy of technical and organisational measures through the top-level concept of [=TechnicalOrganisationalMeasure=], which is further distinguished as [=TechnicalMeasure=] and [=OrganisationalMeasure=]. A technical measure is an implementation detail or technology used to achieve a specific goal or objective, such as an authentication protocol used to validate identity. In contrast, an organisational measure is a process or procedure used by the organisation, for example an authorisation procedure to decide who should be granted access within an organisation.</p>
     <p>Measures can be associated using the generic property [=measureImplementedBy=]. The value or object of this property can be an IRI (or URL) representing a specific measure or standard used to implement it, or a String representing relevant information.</p>
     <p class="note">In the future, we plan to provide a collection of terms and URIs for specifying standards (e.g. ISO) and best practices (e.g. certifications, seals). Whether this should be provided within the DPV itself or as a separate extension similar to DPV-GDPR is to be decided. We welcome participation and contributions for this work.</p>
     <p>DPV provides specific measures for storage of personal data in the form of [=StorageRestriction=], with specialised variants for duration as [=StorageDuration=], location as [=StorageLocation=], deletion as [=StorageDeletion=], and restoration as [=StorageRestoration=].</p>
     <p>The generic properties [=hasStorage=], [=hasLocation=], and [=hasDuration=] enable representing information about storage, location, and duration respectively. These can be used to specify restrictions or conditions, such as for storage of personal data, its processing, or information about recipients.</p>
     <p>For indicating the mitigation of [=Risk=], DPV provides [=RiskMitigationMeasure=] as a top-level concept within the Technical and Organisational measures taxonomy. The property [=mitigatesRisk=] is used to indicate the relationship between risk and its mitigation.</p>
-    <p>The following provides an overview of the important and top-level concepts within the Technical Organisational measures taxonomy:</p>
+    <p>The following provides an overview of the important top-level concepts within the Technical and Organisational measures taxonomy:</p>
     <table>
       <thead>
         <tr>
@@ -740,7 +740,7 @@
         <tr>
           <td>[=TechnicalOrganisationalMeasure=]</td>
           <td>[=hasTechnicalOrganisationalMeasure=]</td>
-          <td>Specifies the technical and organisational measures utilised or applicale</td>
+          <td>Specifies the technical and organisational measures utilised or applicable</td>
         </tr>
         <tr>
           <td></td>
