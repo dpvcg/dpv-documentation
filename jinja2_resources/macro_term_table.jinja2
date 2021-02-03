@@ -36,7 +36,7 @@
           <tr>
             <td>Superclass Of:</td>
             <td>
-              {% for child in children %}
+              {% for child in children|sort %}
               <a href="{{child.iri}}">{{child|prefix_this}}</a>{{", " if not loop.last}}
               {% endfor %}
             </td>
