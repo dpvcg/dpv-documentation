@@ -1,3 +1,5 @@
+> **IMPORTANT: the group and repository has moved to the W3C group github repo at https://github.com/w3c/dpv/ This repository is kept for archival purposes and will be removed.**
+ 
 # Documentation generator for DPV vocabularies
 
 Downloads the CSV data for DPV and other vocabularies (such as DPV-GDPR), converts it to RDF serialisations, and generates HTML documentation using the W3C ReSpec template.
